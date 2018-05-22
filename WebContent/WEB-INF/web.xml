@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>ServletDemoByEclipse</display-name>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.pot.service.server</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/Pot</url-pattern>
+  </servlet-mapping>
+  <!--  -->
+  <servlet>
+    <servlet-name>Json</servlet-name>
+    <servlet-class>com.pot.util.Gsons</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Json</servlet-name>
+    <url-pattern>/json</url-pattern>
+  </servlet-mapping>
+  <!-- 食物菜单 -->
+  <servlet>
+    <servlet-name>FoodMenu</servlet-name>
+    <servlet-class>com.pot.util.SetFoodMenu</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodMenu</servlet-name>
+    <url-pattern>/foodmenu</url-pattern>
+  </servlet-mapping> 
+  <!-- 食物菜单详情 --> 
+  <servlet>
+    <servlet-name>FoodDetail</servlet-name>
+    <servlet-class>com.pot.util.SetFoodDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodDetail</servlet-name>
+    <url-pattern>/fooddetail</url-pattern>
+  </servlet-mapping>
+  <!-- 解析URL --> 
+  <servlet>
+    <servlet-name>UrlParseHandler</servlet-name>
+    <servlet-class>com.pot.util.UrlParseHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UrlParseHandler</servlet-name>
+    <url-pattern>/urlparse</url-pattern>
+  </servlet-mapping>
+
+</web-app>
