@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr/dwr30.dtd">
+<dwr>
+    <allow>
+        <create creator="new" javascript="DwrPush">
+            <param name="class" value="com.pot.service.DwrServlet"></param>
+            <!-- 这个标签可以写也可以不写，无所谓的-->
+            <include method="Send"/>
+        </create>
+    </allow>
+</dwr>

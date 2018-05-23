@@ -20,7 +20,7 @@ public class TcpSocketServer {
 
 		try {
 			// 1.创建一个服务器端Socket，即ServerSocket，制定绑定的端口，并监听此端口
-			ServerSocket serverSocket = new ServerSocket(9999);
+			ServerSocket serverSocket = new ServerSocket(5000);
 			Socket socket = null;
 			
 			// 记录客户端数量

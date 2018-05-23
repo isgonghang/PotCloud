@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -39,7 +40,7 @@
                     <div class="ibox-content text-center p-md">
 
                         <h4 class="m-b-xxs">压力锅设备信息&nbsp;&nbsp;<span class="label label-primary">新</span></h4>
-                        <span class="simple_tag">温度：35℃</span>
+                        <span class="simple_tag">温度：35℃<%=(String)request.getAttribute("data")%></span>
                         <span class="simple_tag">定时：00：09：35</span>
                         <span class="simple_tag">压力:5Kpa</span>
                         <span class="simple_tag">食谱：食谱二</span>

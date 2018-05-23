@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -33,6 +34,7 @@ public class ServerThreadHandler extends Thread {
 		BufferedReader bufferedReader  = null;
 		OutputStream outputStream  = null;
 		PrintWriter printWriter  = null;
+		PrintStream printStream = null;
 		try {
 			// 获取输入流，并读取客户端所发信息
 			inputStream = socket.getInputStream();
@@ -56,31 +58,33 @@ public class ServerThreadHandler extends Thread {
 			
 			// 获取输出流，响应客户端请求
 			outputStream = socket.getOutputStream();
-			printWriter = new PrintWriter(outputStream);
-			printWriter.write("import RPi.GPIO as 10\r\n" + 
-					"import time\r\n" + 
-					"channels = [6,13,19,26]\r\n" + 
-					"def init():\r\n" + 
-					"	IO.setmode(IO.BCM)\r\n" + 
-					"	for x in channels:\r\n" + 
-					"		IO.setup(x,IO.OUn\"\r\n" + 
-					"def on(i):\r\n" + 
-					"	IO.output(IO.HIGH)\r\n" + 
-					"def off(i):\r\n" + 
-					"	IO.output(IO.LOW)\r\n" + 
-					"def ctrl(data):\r\n" + 
-					"	on(data)\r\n" + 
-					"	time.sleep(3)\r\n" + 
-					"	off(data)\r\n" + 
-					"def test():\r\n" + 
-					"	for i in channels:\r\n" + 
-					"		ctrl(i)\r\n" + 
-					"		time.sleep(0,1)	\r\n" + 
-					"def clean():\r\n" + 
-					"	IO.cleanup()\r\n" + 
-					"init()\r\n" + 
-					"test()\r\n" + 
-					"clean()");
+			printStream = new PrintStream(outputStream);
+			String pythonCode = "import RPi.GPIO as 10\r\n"; //字符流转换为字节流
+			byte[] byteStr = pythonCode.getBytes();
+			printStream.write(byteStr);
+//					"import time\r\n" + 
+//					"channels = [6,13,19,26]\r\n" + 
+//					"def init():\r\n" + 
+//					"	IO.setmode(IO.BCM)\r\n" + 
+//					"	for x in channels:\r\n" + 
+//					"		IO.setup(x,IO.OUn\"\r\n" + 
+//					"def on(i):\r\n" + 
+//					"	IO.output(IO.HIGH)\r\n" + 
+//					"def off(i):\r\n" + 
+//					"	IO.output(IO.LOW)\r\n" + 
+//					"def ctrl(data):\r\n" + 
+//					"	on(data)\r\n" + 
+//					"	time.sleep(3)\r\n" + 
+//					"	off(data)\r\n" + 
+//					"def test():\r\n" + 
+//					"	for i in channels:\r\n" + 
+//					"		ctrl(i)\r\n" + 
+//					"		time.sleep(0,1)	\r\n" + 
+//					"def clean():\r\n" + 
+//					"	IO.cleanup()\r\n" + 
+//					"init()\r\n" + 
+//					"test()\r\n" + 
+//					"clean()");
 			printWriter.flush(); //刷新缓存
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

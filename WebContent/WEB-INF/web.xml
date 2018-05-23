@@ -53,5 +53,39 @@
     <servlet-name>UrlParseHandler</servlet-name>
     <url-pattern>/urlparse</url-pattern>
   </servlet-mapping>
+  <!-- Dwr服务器推送 --> 
+  <listener>  
+    <listener-class>org.directwebremoting.servlet.DwrListener</listener-class>  
+  </listener> 
+  
+  <servlet>
+    <servlet-name>dwr-invoker</servlet-name>
+    <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+    	<init-param>
+          <param-name>debug</param-name>
+          <param-value>true</param-value>
+      	</init-param>
+    	<!-- 使用服务器推技术 反转ajax -->
+    	<init-param>
+    		<param-name>activeReverseAjaxEnabled</param-name>
+    		<param-value>true</param-value>
+    	</init-param>
+    	<!-- 能够从其它域进行请求 -->
+    	<init-param>
+    		<param-name>crossDomainSessionSecurity</param-name>
+    		<param-value>false</param-value>
+    	</init-param>
+    	<!-- 允许远程js -->
+    	<init-param>
+    		<param-name>allowScriptTagRemoting</param-name>
+    		<param-value>true</param-value>
+    	</init-param>
+    	
+    	<load-on-startup>1</load-on-startup> 
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dwr-invoker</servlet-name>
+    <url-pattern>/dwr/*</url-pattern>
+  </servlet-mapping>
 
 </web-app>

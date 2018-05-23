@@ -5,9 +5,9 @@ package com.pot.bean;
 
 public class FoodMenu {
     private int id;
+    private String name;
     private String count_image;
     private String circle_image;
-    private String name;
     private int like_count;
 
 	public int getId() {
