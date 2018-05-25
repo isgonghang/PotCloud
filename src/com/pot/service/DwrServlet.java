@@ -1,6 +1,12 @@
 package com.pot.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.directwebremoting.ScriptBuffer;
 import org.directwebremoting.ScriptSession;
@@ -8,10 +14,10 @@ import org.directwebremoting.WebContext;
 import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.proxy.dwr.Util;
 
-public class DwrServlet {
-
+public class DwrServlet{
+	public String msgs;
 	@SuppressWarnings("deprecation")
-    public static void Send(String msg){
+    public void Send(String msg){
         WebContext webContext = WebContextFactory.get();
         @SuppressWarnings("deprecation")
         Collection<ScriptSession> sessions = webContext.getAllScriptSessions();
@@ -28,5 +34,8 @@ public class DwrServlet {
         @SuppressWarnings("deprecation")
         Util util = new Util(sessions);
         util.addScript(scriptBuffer);
+        
+        //输出数据
+        this.msgs = msg;
         }
 }
