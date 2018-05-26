@@ -57,11 +57,14 @@ public class ServerThreadHandler extends Thread {
 			socket.shutdownInput(); // 关闭输入流
 			
 			// 获取输出流，响应客户端请求
-			outputStream = socket.getOutputStream();
-			printStream = new PrintStream(outputStream);
-			String pythonCode = "import RPi.GPIO as 10\r\n"; //字符流转换为字节流
-			byte[] byteStr = pythonCode.getBytes();
-			printStream.write(byteStr);
+			PrintWriter out = new PrintWriter(socket.getOutputStream()); //输出，to 客户端  
+            BufferedReader in = new BufferedReader(new InputStreamReader(  
+                    socket.getInputStream())); //输入，from 客户端 
+            out.println("服务器返回 ^_^ "); 
+            out.flush(); // to 客户端，输出 
+            System.out.println(in.readLine());  // 打印 客户 socket 发过来的字符，按行(\n,\r,或\r\n)  
+            System.out.println("服务器结束"); 
+            socket.close();  
 //					"import time\r\n" + 
 //					"channels = [6,13,19,26]\r\n" + 
 //					"def init():\r\n" + 
@@ -85,7 +88,7 @@ public class ServerThreadHandler extends Thread {
 //					"init()\r\n" + 
 //					"test()\r\n" + 
 //					"clean()");
-			printWriter.flush(); //刷新缓存
+//			printWriter.flush(); //刷新缓存
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
