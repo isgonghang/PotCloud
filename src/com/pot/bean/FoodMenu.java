@@ -1,6 +1,6 @@
 package com.pot.bean;
 /**
- * Created by ke on 2018/4/17.
+ * Model层数据
  */
 
 public class FoodMenu {
@@ -54,7 +54,8 @@ public class FoodMenu {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "FoodMenu [id=" + id + ", name=" + name + ", count_image=" + count_image + ", circle_image="
+				+ circle_image + ", like_count=" + like_count + "]";
 	}
+
 }

@@ -1,32 +1,105 @@
 package com.pot.controller;
 
-import com.pot.bean.*;
-import com.pot.dao.*;
-
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.pot.bean.FoodMenu;
+import com.pot.dao.FoodMenuDao;
+
+/*
+ * 控制层
+ */
 public class FoodMenuAction {
-
-	public static void main(String[] args) throws Exception {
-		FoodMenuDao fmd=new FoodMenuDao();
-		FoodMenu fm1=new FoodMenu();
-		fm1.setId(00);
-		fm1.setName("harris");
-		fm1.setCount_image("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1782158040,768410558&fm=27&gp=0.jpg");
-		fm1.setCircle_image("http://imgsrc.baidu.com/forum/w=580/sign=06e93e0bbd12c8fcb4f3f6c5cc0392b4/7b8727292df5e0feed47c52a586034a85fdf72d2.jpg");
-		fm1.setLike_count(704);
-
-        //添加菜单
-        fmd.addFoodMenu(fm1);
+	
+	// 增加方法
+	public void add(FoodMenu foodmenu) throws Exception {
+		FoodMenuDao dao = new FoodMenuDao();
 		
-//		FoodMenuDao fmd=new FoodMenuDao();
-//		List<FoodMenu> fm=fmd.query();
-//		for (FoodMenu foodmenu : fm) {
-//			System.out.println(foodmenu.getId()+","
-//					+foodmenu.getName()+","
-//					+foodmenu.getCount_image()+","
-//					+foodmenu.getCircle_image()+","
-//					+foodmenu.getLike_count());
-//		}
+		dao.addFoodMenu(foodmenu);
 	}
+	
+	//查询单个foodmenu
+	public FoodMenu get(Integer id) throws SQLException{
+		FoodMenuDao dao = new FoodMenuDao();
+		return dao.getFoodMenu(id);
+	}
+	
+	// 更新方法
+	public void edit(FoodMenu foodmenu) throws Exception {
+		FoodMenuDao dao = new FoodMenuDao();
+		
+		dao.updateFoodMenu(foodmenu);
+	}
+	
+	// 删除方法 根据主键id
+	public void del(Integer id) throws Exception {
+		FoodMenuDao dao = new FoodMenuDao();
+		
+		dao.deleteFoodMenu(id);
+	}
+	
+	// 查询方法 全部查询
+	public List<FoodMenu>  query() throws Exception {
+		FoodMenuDao dao = new FoodMenuDao();
+		
+		return dao.queryFoodMenu();
+	}
+	
+	// 按条件查询
+	public List<FoodMenu> query(List<Map<String,Object>> params) throws Exception {
+		FoodMenuDao dao = new FoodMenuDao();
+		
+		return dao.queryFoodMenu(params);
+	}
+	
+	
+	
+	
+
+//	public static void main(String[] args) throws Exception {
+//		
+//		FoodMenuDao f = new FoodMenuDao();
+//		//插入测试
+//		FoodMenu f1 = new FoodMenu();
+//		f1.setName("n123");
+//		f1.setCount_image("a123a.com");
+//		f1.setCircle_image("a123a1.com");
+//		f1.setLike_count(2125);
+//		f1.setId(6);
+//		
+//		List<FoodMenu> result = f.queryFoodMenu("harris",1);
+//		List<Map<String,Object>> params = new ArrayList<Map<String,Object>>();
+//		Map<String,Object> param = new HashMap<String, Object>();
+//		param.put("name", "name");
+//		param.put("rela", "like");
+//		param.put("value", "'%harris%'");
+//		params.add(param);
+//		
+//		
+//		List<FoodMenu> result = f.queryFoodMenu(params);
+//		for (int i = 0; i < result.size(); i++) {
+//			System.out.println(result.get(i).toString());
+//		}
+//		FoodMenu f2 = f.getFoodMenu(4);
+//		System.out.println(f2.toString());
+//		
+//		f.deleteFoodMenu(6);
+//		f.updateFoodMenu(f1);
+//		f.addFoodMenu(f1);
+		
+//		//查询测试
+//		//返回集合数据
+//		List<FoodMenu> fm = f.queryFoodMenu();
+//		//遍历集合
+//		for (FoodMenu foodmenu : fm) {
+//			System.out.println(foodmenu.getId() + "," 
+//							 + foodmenu.getName() + ","
+//							 + foodmenu.getCount_image() + ","
+//							 + foodmenu.getCircle_image() + ","
+//							 + foodmenu.getLike_count());
+//		}
+//	}
 }
