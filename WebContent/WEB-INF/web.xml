@@ -97,4 +97,14 @@
     <servlet-name>DwrInfoOutput</servlet-name>
     <url-pattern>/setinfo</url-pattern>
   </servlet-mapping>
+  
+  <!-- 上传UpdateRecipesDetail --> 
+  <servlet>
+    <servlet-name>UpdateRecipesDetail</servlet-name>
+    <servlet-class>com.pot.util.UpdateRecipesDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateRecipesDetail</servlet-name>
+    <url-pattern>/updaterecipesdetail</url-pattern>
+  </servlet-mapping>
 </web-app>
