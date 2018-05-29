@@ -107,4 +107,24 @@
     <servlet-name>UpdateRecipesDetail</servlet-name>
     <url-pattern>/updaterecipesdetail</url-pattern>
   </servlet-mapping>
+   
+<!-- 动态GetDynamicRecipes --> 
+  <servlet>
+    <servlet-name>GetDynamicRecipes</servlet-name>
+    <servlet-class>com.pot.util.GetDynamicRecipes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDynamicRecipes</servlet-name>
+    <url-pattern>/dynamicrecipes</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 静态GetDynamicRecipes --> 
+  <servlet>
+    <servlet-name>GetStaticRecipes</servlet-name>
+    <servlet-class>com.pot.util.GetStaticRecipes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetStaticRecipes</servlet-name>
+    <url-pattern>/staticrecipes</url-pattern>
+  </servlet-mapping>
 </web-app>

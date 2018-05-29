@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `recipesdetail`;
 CREATE TABLE `recipesdetail`  (
   `recipeid` bigint(250)  NOT NULL,
-  `image` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `image` TEXT(65534) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `score` varchar(300) NULL DEFAULT NULL,
   `time` int(30) NULL DEFAULT NULL,
   `source` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,

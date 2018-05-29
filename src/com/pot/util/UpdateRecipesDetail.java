@@ -36,6 +36,7 @@ public class UpdateRecipesDetail extends HttpServlet {
 		
 		Long recipeid = recipesdetail.getRecipeId();
 		String image = recipesdetail.getImage();
+
 		Float score = recipesdetail.getScore();
 		Integer time = recipesdetail.getTime();
 		String source = recipesdetail.getSource();
