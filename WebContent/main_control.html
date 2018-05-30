@@ -81,6 +81,12 @@
 
             </div>
 
+                <textarea rows="3" cols="20" id="content">
+
+    </textarea>
+    <button id="fasong">Send</button>
+
+
 
         </div>
 
@@ -94,7 +100,33 @@
 
     <!-- 自定义js -->
     <script src="js/content.js?v=1.0.0"></script>
+    <script src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
+    <script>
+		var goEasy = new GoEasy({
+        	appkey: 'BC-9a8299840a374746a3dbc5281310cefc'
+    	});
+		$("#fasong").click(function(){
+			goEasy.subscribe({
+				channel: "my_channel",
+				onMessage: function (message) {
+					alert("您有新消息：channel：" + message.channel + " 内容：" + message.content);
+				},
+				onSuccess: function () {
+					alert("Channel订阅成功。");
+				},
+				onFailed: function (error) {
+					alert("Channel订阅失败, 错误编码：" + error.code + " 错误信息：" + error.content)
+				}
+			});
 
+			
+		});
+
+
+
+
+
+    </script>
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!--统计代码，可删除-->

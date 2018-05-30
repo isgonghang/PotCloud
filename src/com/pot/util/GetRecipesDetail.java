@@ -2,31 +2,28 @@ package com.pot.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pot.bean.StaticRecipes;
 import com.pot.bean.RecipesDetail;
-import com.pot.controller.StaticRecipesAction;
+import com.pot.controller.RecipesDetailAction;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class GetStaticRecipes extends HttpServlet {
+public class GetRecipesDetail extends HttpServlet {
+
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
-		StaticRecipesAction action = new StaticRecipesAction(); //获取数据库连接方法
+		RecipesDetailAction action = new RecipesDetailAction(); //获取数据库连接方法
 		
 		//将查询结果转换为json格式
 		JSONArray jsonarray = new JSONArray();
@@ -34,15 +31,15 @@ public class GetStaticRecipes extends HttpServlet {
 		
 		//全部查询
 		try {
-			List<StaticRecipes> result = action.query();
+			List<RecipesDetail> result = action.query();
 			
 			for (int i = 0; i < result.size(); i++) {
-				jsonobj.put("id", result.get(i).getId());
-				jsonobj.put("name", result.get(i).getName());
-				jsonobj.put("like", result.get(i).getLike());
+				jsonobj.put("recipeId", result.get(i).getRecipeId());
+				jsonobj.put("image", result.get(i).getImage());
+				jsonobj.put("score", result.get(i).getScore());
 				jsonobj.put("time", result.get(i).getTime());
-				jsonobj.put("image_left", result.get(i).getImage_left());
-				jsonobj.put("image_right", result.get(i).getImage_right());
+				jsonobj.put("source", result.get(i).getSource());
+				jsonobj.put("other", result.get(i).getOther());
 				jsonarray.add(jsonobj); 
 			}
 			System.out.println(jsonarray);
@@ -64,7 +61,7 @@ public class GetStaticRecipes extends HttpServlet {
 //		params.add(map);
 //		
 //		
-//		List<StaticRecipes> result;
+//		List<RecipesDetail> result;
 		
 		//将查询结果转换为json格式
 //		JSONArray jsonarray = new JSONArray();

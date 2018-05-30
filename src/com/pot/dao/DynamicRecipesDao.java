@@ -80,14 +80,19 @@ public class DynamicRecipesDao {
 	
 	// 4. 查询  可能返回多个数据
 	public List<DynamicRecipes> queryDynamicRecipes() throws Exception {
+
+		List<DynamicRecipes> result=new ArrayList<DynamicRecipes>();
+		
 		//获得数据库连接
-		Connection conn = DBUtil.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select id,name,like,time,image_left,image_right from dynamicrecipes ");
+		Connection conn=DBUtil.getConnection();
+		StringBuilder sb=new StringBuilder();
+		sb.append("select * from dynamicrecipes ");
 		
-		List<DynamicRecipes> dr = new ArrayList<DynamicRecipes>();
+		PreparedStatement ptmt=conn.prepareStatement(sb.toString());
+		
+		ResultSet rs=ptmt.executeQuery();
+		
 		DynamicRecipes d = null;
-		
 		while(rs.next()) {
 			d = new DynamicRecipes();
 			d.setId(rs.getLong("id"));
@@ -97,9 +102,9 @@ public class DynamicRecipesDao {
 			d.setImage_left(rs.getString("image_left"));
 			d.setImage_right(rs.getString("image_right"));
 		
-			dr.add(d);
+			result.add(d);
 		}
-		return dr;	
+		return result;	
 	}
 	
 	// 查询单个数据

@@ -84,7 +84,7 @@ public class StaticRecipesDao {
 		//获得数据库连接
 		Connection conn = DBUtil.getConnection();
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select id,name,like,time,image_left,image_right from staticrecipes ");
+		ResultSet rs = stmt.executeQuery("select * from staticrecipes ");
 		
 		List<StaticRecipes> sr = new ArrayList<StaticRecipes>();
 		StaticRecipes s = null;

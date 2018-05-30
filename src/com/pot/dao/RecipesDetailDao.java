@@ -92,7 +92,7 @@ public class RecipesDetailDao {
 		
 		while(rs.next()) {
 			r = new RecipesDetail();
-			r.setRecipeId(rs.getLong("id"));
+			r.setRecipeId(rs.getLong("recipeid"));
 			r.setImage(rs.getString("image"));
 			r.setScore(rs.getFloat("score"));
 			r.setTime(rs.getInt("time"));

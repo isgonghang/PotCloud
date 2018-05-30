@@ -31,38 +31,27 @@ public class GetDynamicRecipes extends HttpServlet {
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-//		response.setContentType("json/application;charset=UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		
 		DynamicRecipesAction action = new DynamicRecipesAction(); //获取数据库连接方法
-		
-		//按参数查询
-		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("name", "id");
-		map.put("rela", "=");
-		map.put("value", 1); //必须加''
-		
-		params.add(map);
-		
-		
-		List<DynamicRecipes> result;
 		
 		//将查询结果转换为json格式
 		JSONArray jsonarray = new JSONArray();
 		JSONObject jsonobj = new JSONObject();
+		
+		//全部查询
 		try {
-			result = action.query(params);
+			List<DynamicRecipes> result = action.query();
+			
 			for (int i = 0; i < result.size(); i++) {
-				//生成json
 				jsonobj.put("id", result.get(i).getId());
 				jsonobj.put("name", result.get(i).getName());
 				jsonobj.put("like", result.get(i).getLike());
 				jsonobj.put("time", result.get(i).getTime());
 				jsonobj.put("image_left", result.get(i).getImage_left());
 				jsonobj.put("image_right", result.get(i).getImage_right());
-				
+				jsonarray.add(jsonobj); 
 			}
-			jsonarray.add(jsonobj); 
 			System.out.println(jsonarray);
 			// 输出数据
 			PrintWriter out = response.getWriter();            
@@ -71,6 +60,43 @@ public class GetDynamicRecipes extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//按参数查询
+//		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
+//		Map<String, Object> map = new HashMap<String,Object>();
+//		map.put("name", "id");
+//		map.put("rela", "=");
+//		map.put("value", 1); //必须加''
+//		
+//		params.add(map);
+//		
+//		
+//		List<DynamicRecipes> result;
+		
+		//将查询结果转换为json格式
+//		JSONArray jsonarray = new JSONArray();
+//		JSONObject jsonobj = new JSONObject();
+//		try {
+//			result = action.query(params);
+//			for (int i = 0; i < result.size(); i++) {
+//				//生成json
+//				jsonobj.put("id", result.get(i).getId());
+//				jsonobj.put("name", result.get(i).getName());
+//				jsonobj.put("like", result.get(i).getLike());
+//				jsonobj.put("time", result.get(i).getTime());
+//				jsonobj.put("image_left", result.get(i).getImage_left());
+//				jsonobj.put("image_right", result.get(i).getImage_right());
+//				
+//			}
+//			jsonarray.add(jsonobj); 
+//			System.out.println(jsonarray);
+//			// 输出数据
+//			PrintWriter out = response.getWriter();            
+//			out.println(String.valueOf(jsonarray));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 	

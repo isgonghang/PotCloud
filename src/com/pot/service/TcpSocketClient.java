@@ -18,7 +18,7 @@ public class TcpSocketClient {
 	public static void main(String[] args) {
 		try {
 			// 1.创建客户端Socket，指定服务器地址和端口
-			Socket socket = new Socket("localhost",9999);
+			Socket socket = new Socket("localhost",5000);
 			
 			// 2.获取输出流，用来向服务器端发送信息
 			OutputStream outputStream = socket.getOutputStream(); // 字节输入流
@@ -26,7 +26,6 @@ public class TcpSocketClient {
 			printWriter.write("temperature:25,time:200,user:gh,location:xian");
 			printWriter.flush(); // 刷新缓存
 			
-			socket.shutdownOutput(); //关闭输出流
 			
 			// 3.获取输入流，并读取服务器端的响应信息
 			InputStream inputStream = socket.getInputStream();

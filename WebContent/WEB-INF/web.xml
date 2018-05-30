@@ -127,4 +127,14 @@
     <servlet-name>GetStaticRecipes</servlet-name>
     <url-pattern>/staticrecipes</url-pattern>
   </servlet-mapping>
+  
+  <!-- 获得云食谱GetRecipesDetail --> 
+  <servlet>
+    <servlet-name>GetRecipesDetail</servlet-name>
+    <servlet-class>com.pot.util.GetRecipesDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetRecipesDetail</servlet-name>
+    <url-pattern>/recipesdetail</url-pattern>
+  </servlet-mapping>
 </web-app>
