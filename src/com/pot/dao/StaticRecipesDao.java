@@ -21,19 +21,18 @@ public class StaticRecipesDao {
 		Connection conn = DBUtil.getConnection();
 		String sql = ""
 				 	 + "insert into staticrecipes"
-				 	 + "(id,name,like,time,image_left,image_right)"
+				 	 + "(id,count_image,circle_image,name,like_count)"
 				 	 + "values(" 
-				 	 + "?,?,?,?,?,?)";
+				 	 + "?,?,?,?,?)";
 		//预编译sql语句
 		PreparedStatement ptmt = conn.prepareStatement(sql);
 		
 		//传参　向　？　中赋值
 		ptmt.setLong(1, sr.getId());
-		ptmt.setString(2, sr.getName());
-		ptmt.setInt(3, sr.getLike());
-		ptmt.setString(4, sr.getTime());
-		ptmt.setString(5, sr.getImage_left());
-		ptmt.setString(6, sr.getImage_right());
+		ptmt.setString(2, sr.getCount_image());
+		ptmt.setString(3, sr.getCircle_image());
+		ptmt.setString(4, sr.getName());
+		ptmt.setInt(5, sr.getLike_count());
 		
 		//调用execute()执行改sql语句
 		ptmt.execute();
@@ -62,18 +61,17 @@ public class StaticRecipesDao {
 		Connection conn = DBUtil.getConnection();
 		String sql = ""
 				 	 + " update staticrecipes "
-				 	 + " set id=?,name=?,like=?,time=?,image_left=?,image_right=? "
+				 	 + " set id=?,count_image=?,circle_image=?,name=?,like_count=? "
 				 	 + " where id=? ";
 		//预编译sql语句
 		PreparedStatement ptmt = conn.prepareStatement(sql);
 		
 		//传参　向　？　中赋值
 		ptmt.setLong(1, sr.getId());
-		ptmt.setString(2, sr.getName());
-		ptmt.setInt(3, sr.getLike());
-		ptmt.setString(4, sr.getTime());
-		ptmt.setString(5, sr.getImage_left());
-		ptmt.setString(6, sr.getImage_right());
+		ptmt.setString(2, sr.getCount_image());
+		ptmt.setString(3, sr.getCircle_image());
+		ptmt.setString(4, sr.getName());
+		ptmt.setInt(5, sr.getLike_count());
 		
 		//调用execute()执行改sql语句
 		ptmt.execute();
@@ -92,11 +90,10 @@ public class StaticRecipesDao {
 		while(rs.next()) {
 			s = new StaticRecipes();
 			s.setId(rs.getLong("id"));
+			s.setCount_image(rs.getString("count_image"));
+			s.setCircle_image(rs.getString("circle_image"));
 			s.setName(rs.getString("name"));
-			s.setLike(rs.getInt("like"));
-			s.setTime(rs.getString("time"));
-			s.setImage_left(rs.getString("image_left"));
-			s.setImage_right(rs.getString("image_right"));
+			s.setLike_count(rs.getInt("like_count"));
 		
 			sr.add(s);
 		}
@@ -123,11 +120,10 @@ public class StaticRecipesDao {
 		while(rs.next()) {
 			sr = new StaticRecipes();
 			sr.setId(rs.getLong("id"));
+			sr.setCount_image(rs.getString("count_image"));
+			sr.setCircle_image(rs.getString("circle_image"));
 			sr.setName(rs.getString("name"));
-			sr.setLike(rs.getInt("like"));
-			sr.setTime(rs.getString("time"));
-			sr.setImage_left(rs.getString("image_left"));
-			sr.setImage_right(rs.getString("image_right"));
+			sr.setLike_count(rs.getInt("like_count"));
 		}
 		return sr;
 	}
@@ -164,11 +160,10 @@ public class StaticRecipesDao {
 		while(rs.next()) {
 			sr = new StaticRecipes();
 			sr.setId(rs.getLong("id"));
+			sr.setCount_image(rs.getString("count_image"));
+			sr.setCircle_image(rs.getString("circle_image"));
 			sr.setName(rs.getString("name"));
-			sr.setLike(rs.getInt("like"));
-			sr.setTime(rs.getString("time"));
-			sr.setImage_left(rs.getString("image_left"));
-			sr.setImage_right(rs.getString("image_right"));
+			sr.setLike_count(rs.getInt("like_count"));
 			
 			result.add(sr);
 		}

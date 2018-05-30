@@ -23,11 +23,10 @@ public class TestSqlAction {
 		
 		for (int i = 0; i < result.size(); i++) {
 			System.out.println(result.get(i).getId() + "："
+					   + result.get(i).getCount_image() + "："
+					   + result.get(i).getCircle_image() + "："
 					   + result.get(i).getName() + "："
-					   + result.get(i).getLike() + "："
-					   + result.get(i).getTime() + "："
-					   + result.get(i).getImage_left() + "："
-					   + result.get(i).getImage_right());
+					   + result.get(i).getLike_count());
 		}
 		
 		/*添加*/

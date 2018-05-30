@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pot.bean.DynamicRecipes;
+import com.pot.bean.StaticRecipes;
 
 public class DynamicRecipesDao {
 
@@ -20,7 +21,7 @@ public class DynamicRecipesDao {
 		Connection conn = DBUtil.getConnection();
 		String sql = ""
 				 	 + "insert into dynamicrecipes"
-				 	 + "(id,name,like,time,image_left,image_right)"
+				 	 + "(id,count_image,circle_image,name,like_count)"
 				 	 + "values(" 
 				 	 + "?,?,?,?,?,?)";
 		//预编译sql语句
@@ -28,11 +29,10 @@ public class DynamicRecipesDao {
 		
 		//传参　向　？　中赋值
 		ptmt.setLong(1, dr.getId());
-		ptmt.setString(2, dr.getName());
-		ptmt.setInt(3, dr.getLike());
-		ptmt.setString(4, dr.getTime());
-		ptmt.setString(5, dr.getImage_left());
-		ptmt.setString(6, dr.getImage_right());
+		ptmt.setString(2, dr.getCount_image());
+		ptmt.setString(3, dr.getCircle_image());
+		ptmt.setString(4, dr.getName());
+		ptmt.setInt(5, dr.getLike_count());
 		
 		//调用execute()执行改sql语句
 		ptmt.execute();
@@ -68,11 +68,10 @@ public class DynamicRecipesDao {
 		
 		//传参　向　？　中赋值
 		ptmt.setLong(1, dr.getId());
-		ptmt.setString(2, dr.getName());
-		ptmt.setInt(3, dr.getLike());
-		ptmt.setString(4, dr.getTime());
-		ptmt.setString(5, dr.getImage_left());
-		ptmt.setString(6, dr.getImage_right());
+		ptmt.setString(2, dr.getCount_image());
+		ptmt.setString(3, dr.getCircle_image());
+		ptmt.setString(4, dr.getName());
+		ptmt.setInt(5, dr.getLike_count());
 		
 		//调用execute()执行改sql语句
 		ptmt.execute();
@@ -96,11 +95,10 @@ public class DynamicRecipesDao {
 		while(rs.next()) {
 			d = new DynamicRecipes();
 			d.setId(rs.getLong("id"));
+			d.setCount_image(rs.getString("count_image"));
+			d.setCircle_image(rs.getString("circle_image"));
 			d.setName(rs.getString("name"));
-			d.setLike(rs.getInt("like"));
-			d.setTime(rs.getString("time"));
-			d.setImage_left(rs.getString("image_left"));
-			d.setImage_right(rs.getString("image_right"));
+			d.setLike_count(rs.getInt("like_count"));
 		
 			result.add(d);
 		}
@@ -127,11 +125,10 @@ public class DynamicRecipesDao {
 		while(rs.next()) {
 			dr = new DynamicRecipes();
 			dr.setId(rs.getLong("id"));
+			dr.setCount_image(rs.getString("count_image"));
+			dr.setCircle_image(rs.getString("circle_image"));
 			dr.setName(rs.getString("name"));
-			dr.setLike(rs.getInt("like"));
-			dr.setTime(rs.getString("time"));
-			dr.setImage_left(rs.getString("image_left"));
-			dr.setImage_right(rs.getString("image_right"));
+			dr.setLike_count(rs.getInt("like_count"));
 		}
 		return dr;
 	}
@@ -168,11 +165,10 @@ public class DynamicRecipesDao {
 		while(rs.next()) {
 			dr = new DynamicRecipes();
 			dr.setId(rs.getLong("id"));
+			dr.setCount_image(rs.getString("count_image"));
+			dr.setCircle_image(rs.getString("circle_image"));
 			dr.setName(rs.getString("name"));
-			dr.setLike(rs.getInt("like"));
-			dr.setTime(rs.getString("time"));
-			dr.setImage_left(rs.getString("image_left"));
-			dr.setImage_right(rs.getString("image_right"));
+			dr.setLike_count(rs.getInt("like_count"));
 			
 			result.add(dr);
 		}

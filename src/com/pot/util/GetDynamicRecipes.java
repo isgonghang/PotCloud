@@ -45,11 +45,11 @@ public class GetDynamicRecipes extends HttpServlet {
 			
 			for (int i = 0; i < result.size(); i++) {
 				jsonobj.put("id", result.get(i).getId());
+				jsonobj.put("count_image", result.get(i).getCount_image());
+				jsonobj.put("circle_image", result.get(i).getCircle_image());
 				jsonobj.put("name", result.get(i).getName());
-				jsonobj.put("like", result.get(i).getLike());
-				jsonobj.put("time", result.get(i).getTime());
-				jsonobj.put("image_left", result.get(i).getImage_left());
-				jsonobj.put("image_right", result.get(i).getImage_right());
+				jsonobj.put("like_count", result.get(i).getLike_count());
+				
 				jsonarray.add(jsonobj); 
 			}
 			System.out.println(jsonarray);
