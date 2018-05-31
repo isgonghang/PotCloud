@@ -1,33 +1,17 @@
 package com.pot.util;
 
-import com.pot.bean.*;
-
-import net.sf.json.JSONObject;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.junit.Test;
-
-import com.google.gson.Gson;
-
-/*
- * 解析URL处理类
- */
-public class UrlParseHandler extends HttpServlet{
+public class StopHeating extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		int count = 0; //记录连接次数
+			int count = 0; //记录连接次数
 		
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
@@ -44,12 +28,11 @@ public class UrlParseHandler extends HttpServlet{
 			System.out.println("getMethod: " + request.getMethod());  
 			System.out.println("-------request.getParamterMap()-------"); 
         
-			String temperature = request.getParameter("temperature");
-			String pressure = request.getParameter("pressure");
-			String time = request.getParameter("time");
-			System.out.println(temperature + "," + pressure + "," + time);
+			String stop = request.getParameter("stop");
+
+			System.out.println("获取到的控制命令为：" + stop);
 			PrintWriter printWriter = response.getWriter();
-			printWriter.write("你好，我是服务器" + temperature + "," + pressure + "," + time);
+			printWriter.write("你好，我是服务器," + "获取到的控制命令为：" + stop);
 			printWriter.flush();
 			printWriter.close();
 			
@@ -59,7 +42,23 @@ public class UrlParseHandler extends HttpServlet{
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
 		doGet(request, response);
+        
+		response.setContentType("text/html;charset=utf-8");  
+        request.setCharacterEncoding("utf-8");  
+        response.setCharacterEncoding("utf-8"); 
+		
+		// 接收到指令后，想客户端返回已收到
+		String stop = request.getParameter("stop");
+		PrintWriter out = response.getWriter();
+		
+		if (stop != null && stop.equals("停止")) {
+			out.println("已获取停止指令");
+		}
+		
+        out.flush();  //刷新缓存
+        out.close();  //关闭输出流
 	}
 	
 }

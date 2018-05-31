@@ -15,6 +15,10 @@ import com.pot.controller.RecipesDetailAction;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+
+/*
+ * 获取上传云食谱
+ */
 public class GetRecipesDetail extends HttpServlet {
 
 	@Override

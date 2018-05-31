@@ -97,7 +97,6 @@
     <servlet-name>DwrInfoOutput</servlet-name>
     <url-pattern>/setinfo</url-pattern>
   </servlet-mapping>
-  
   <!-- 上传UpdateRecipesDetail --> 
   <servlet>
     <servlet-name>UpdateRecipesDetail</servlet-name>
@@ -107,8 +106,7 @@
     <servlet-name>UpdateRecipesDetail</servlet-name>
     <url-pattern>/updaterecipesdetail</url-pattern>
   </servlet-mapping>
-   
-<!-- 动态GetDynamicRecipes --> 
+  <!-- 动态GetDynamicRecipes --> 
   <servlet>
     <servlet-name>GetDynamicRecipes</servlet-name>
     <servlet-class>com.pot.util.GetDynamicRecipes</servlet-class>
@@ -117,7 +115,6 @@
     <servlet-name>GetDynamicRecipes</servlet-name>
     <url-pattern>/dynamicrecipes</url-pattern>
   </servlet-mapping>
-  
   <!-- 静态GetDynamicRecipes --> 
   <servlet>
     <servlet-name>GetStaticRecipes</servlet-name>
@@ -127,7 +124,6 @@
     <servlet-name>GetStaticRecipes</servlet-name>
     <url-pattern>/staticrecipes</url-pattern>
   </servlet-mapping>
-  
   <!-- 获得云食谱GetRecipesDetail --> 
   <servlet>
     <servlet-name>GetRecipesDetail</servlet-name>
@@ -137,4 +133,38 @@
     <servlet-name>GetRecipesDetail</servlet-name>
     <url-pattern>/recipesdetail</url-pattern>
   </servlet-mapping>
+  
+  <!-- 获取手机手动加热信息 --> 
+  <servlet>
+    <servlet-name>GetAndroidControlInfo</servlet-name>
+    <servlet-class>com.pot.util.GetAndroidControlInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAndroidControlInfo</servlet-name>
+    <url-pattern>/androidcontrolinfo</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 获取手机自动曲线加热信息 --> 
+  <servlet>
+    <servlet-name>GetAndroidAutoHeating</servlet-name>
+    <servlet-class>com.pot.util.GetAndroidAutoHeating</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAndroidAutoHeating</servlet-name>
+    <url-pattern>/androidautoheating</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 手机停止加热指令 --> 
+  <servlet>
+    <servlet-name>StopHeating</servlet-name>
+    <servlet-class>com.pot.util.StopHeating</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StopHeating</servlet-name>
+    <url-pattern>/stopheating</url-pattern>
+  </servlet-mapping>
 </web-app>
+
+
+
+

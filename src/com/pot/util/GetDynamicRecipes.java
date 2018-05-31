@@ -25,6 +25,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import sun.management.counter.Variability;
 
+/*
+ * 获取动态推荐食谱
+ */
 public class GetDynamicRecipes extends HttpServlet {
 	 
 	@Override

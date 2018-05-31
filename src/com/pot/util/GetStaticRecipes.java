@@ -19,6 +19,9 @@ import com.pot.controller.StaticRecipesAction;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+/*
+ * 获取静态推荐食谱
+ */
 public class GetStaticRecipes extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
