@@ -16,13 +16,12 @@ import com.pot.service.GoEasyPush;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class GetAndroidControlInfo extends HttpServlet  {
+public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
 		
 		System.out.println("Get");
 		String value = request.getParameter("start");
@@ -43,14 +42,24 @@ public class GetAndroidControlInfo extends HttpServlet  {
 		Long time = androidControlInfo.getTime();
 		
 		System.out.println(time + "," + pressure + "," + time);
+		String info = time + "," + pressure + "," + time;
 		
 		printWriter.flush();
 		printWriter.close();
+		
+
 
 	}
 		
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+	}
+	
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
