@@ -12,19 +12,20 @@ import net.sf.json.JSONObject;
 
 public class GoEasyPush {
 	
-	public static void main(String[] args) {
+	public void PushInfo(String info) {
+		
 		//将查询结果转换为json格式
-		JSONObject jsonobj = new JSONObject();
-		
-		jsonobj.put("temperature", 44);
-		jsonobj.put("pressure", 16);
-		jsonobj.put("time", 600);
-		
-		
-		String potInfo = String.valueOf(jsonobj);
+//		JSONObject jsonobj = new JSONObject();
+//		
+//		jsonobj.put("temperature", 44);
+//		jsonobj.put("pressure", 16);
+//		jsonobj.put("time", 600);
+//		
+//		
+//		String potInfo = String.valueOf(jsonobj);
 		
 		GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io","BC-9a8299840a374746a3dbc5281310cefc");
-		goEasy.publish("my_channel", potInfo, new PublishListener(){
+		goEasy.publish("my_channel", info, new PublishListener(){
 			@Override
 			public void onSuccess() {
 				System.out.print("消息发布成功。");

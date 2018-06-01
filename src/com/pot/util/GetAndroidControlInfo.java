@@ -19,30 +19,35 @@ import net.sf.json.JSONObject;
 public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		// 设置请求和响应编码文件格式
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
+		// 接收客户端传过来的参数
 		System.out.println("Get");
-		String value = request.getParameter("start");
-		System.out.println(value);
-		PrintWriter printWriter = response.getWriter();
-		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + value);
-		
 		String jsonStr = request.getParameter("start");
-		
 		System.out.println(jsonStr);
 		
+		// 通过调用GoEasyPush类将信息主动推送到浏览器
+		GoEasyPush goEasyPush = new GoEasyPush();
+		goEasyPush.PushInfo("{\"temperature\":44,\"pressure\":17,\"time\":600}");
+		
+		// 将信息输出打印到浏览器中
+		PrintWriter printWriter = response.getWriter();
+		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);
+		
+		// 将参数解析成json格式
 		Gson gson = new Gson();
 		AndroidControlInfo androidControlInfo = gson.fromJson(jsonStr, AndroidControlInfo.class);
-		
 		
 		Integer temerature = androidControlInfo.getTemperature();
 		Integer pressure = androidControlInfo.getPressure();
 		Long time = androidControlInfo.getTime();
 		
-		System.out.println(time + "," + pressure + "," + time);
 		String info = time + "," + pressure + "," + time;
+		
+				
 		
 		printWriter.flush();
 		printWriter.close();

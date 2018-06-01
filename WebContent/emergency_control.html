@@ -28,7 +28,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content text-center p-md">
-                        <h2><span class="text-navy">压力锅实时状态信息</span></h2>
+                        <h2><span class="text-navy">压力锅紧急控制</span></h2>
                     </div>
                 </div>
             </div>
@@ -37,20 +37,22 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content text-center p-md">
-
-                        <h4 class="m-b-xxs">压力锅设备信息&nbsp;&nbsp;<span class="label label-primary">新</span></h4>
+                        <br/>
+                        <button id="stop" class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit" style="margin-right:490px;">
+                            <strong>
+                                &nbsp;<br/>
+                                &nbsp;&nbsp;紧急停止&nbsp;&nbsp;<br/>
+                                &nbsp;<br/>
+                            </strong>
+                        </button>
                         <br/>
                         <br/>
-                        <span class="simple_tag">温度：<span id="temperature">0</span>℃</span><br/>
-                        <span></span><br/>
-                        <span class="simple_tag">压力:<span id="pressure">0</span>Kpa</span><br/>
-                        <span></span><br/>
-                        <span class="simple_tag">定时：<span id="timer">距离结束还有00分00秒</span></span>
+                        <br/>
                         <div id="warring" style="color:red"></div>
                         <div class="m-t-md">
-                            <div class="p-lg " style="margin-left: 10px">
+                            <div class="p-lg " style="margin-left: 30px">
                                 <a href="">
-                                    <img class="img-responsive img-shadow" src="./img/bg1.jpg" alt="">
+                                    <img class="img-responsive img-shadow" src="./img/bg2.jpg" alt="">
                                 </a>
                             </div>
                         </div>
@@ -113,6 +115,16 @@
 			});
 
 		});
+
+
+            $("#stop").click(function(){
+                var result = confirm("确定要紧急停止吗？");
+                if (result = true) {
+                    alert("You pressed OK!");
+                } else {
+                    alert("You pressed Cancel!");
+                }
+            })
 
     </script>
 

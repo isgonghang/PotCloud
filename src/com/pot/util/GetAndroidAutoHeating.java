@@ -24,6 +24,7 @@ public class GetAndroidAutoHeating extends HttpServlet  {
 		System.out.println("Get");
 		String value = request.getParameter("start");
 		System.out.println(value);
+		
 		PrintWriter printWriter = response.getWriter();
 		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + value);
 			
