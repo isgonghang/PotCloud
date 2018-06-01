@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pot.service.GoEasyPush;
+
 public class StopHeating extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +33,11 @@ public class StopHeating extends HttpServlet {
 			String stop = request.getParameter("stop");
 
 			System.out.println("获取到的控制命令为：" + stop);
+			
+			// 通过调用GoEasyPush类将信息主动推送到浏览器
+			GoEasyPush goEasyPush = new GoEasyPush();
+			goEasyPush.PushInfo(stop);
+			
 			PrintWriter printWriter = response.getWriter();
 			printWriter.write("你好，我是服务器," + "获取到的控制命令为：" + stop);
 			printWriter.flush();

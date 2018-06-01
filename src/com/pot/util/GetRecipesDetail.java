@@ -2,7 +2,10 @@ package com.pot.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,25 +30,41 @@ public class GetRecipesDetail extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
+		// 接收客户端传过来的参数
+		String idStr = request.getParameter("id");
+		System.out.println("获取到的recipeId为：" + idStr);
+		
 		RecipesDetailAction action = new RecipesDetailAction(); //获取数据库连接方法
+		
+		//按参数查询
+		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("name", "recipeid");
+		map.put("rela", "=");
+		map.put("value", idStr); //必须加''
+		
+		params.add(map);
+		
+		
+		List<RecipesDetail> result;
 		
 		//将查询结果转换为json格式
 		JSONArray jsonarray = new JSONArray();
 		JSONObject jsonobj = new JSONObject();
-		
-		//全部查询
 		try {
-			List<RecipesDetail> result = action.query();
-			
+			result = action.query(params);
 			for (int i = 0; i < result.size(); i++) {
+				//生成json
 				jsonobj.put("recipeId", result.get(i).getRecipeId());
 				jsonobj.put("image", result.get(i).getImage());
 				jsonobj.put("score", result.get(i).getScore());
 				jsonobj.put("time", result.get(i).getTime());
 				jsonobj.put("source", result.get(i).getSource());
 				jsonobj.put("other", result.get(i).getOther());
-				jsonarray.add(jsonobj); 
+				jsonarray.add(jsonobj);
+				
 			}
+			jsonarray.add(jsonobj); 
 			System.out.println(jsonarray);
 			// 输出数据
 			PrintWriter out = response.getWriter();            
@@ -54,43 +73,6 @@ public class GetRecipesDetail extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//按参数查询
-//		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
-//		Map<String, Object> map = new HashMap<String,Object>();
-//		map.put("name", "id");
-//		map.put("rela", "=");
-//		map.put("value", 1); //必须加''
-//		
-//		params.add(map);
-//		
-//		
-//		List<RecipesDetail> result;
-		
-		//将查询结果转换为json格式
-//		JSONArray jsonarray = new JSONArray();
-//		JSONObject jsonobj = new JSONObject();
-//		try {
-//			result = action.query(params);
-//			for (int i = 0; i < result.size(); i++) {
-//				//生成json
-//				jsonobj.put("id", result.get(i).getId());
-//				jsonobj.put("name", result.get(i).getName());
-//				jsonobj.put("like", result.get(i).getLike());
-//				jsonobj.put("time", result.get(i).getTime());
-//				jsonobj.put("image_left", result.get(i).getImage_left());
-//				jsonobj.put("image_right", result.get(i).getImage_right());
-//				
-//			}
-//			jsonarray.add(jsonobj); 
-//			System.out.println(jsonarray);
-//			// 输出数据
-//			PrintWriter out = response.getWriter();            
-//			out.println(String.valueOf(jsonarray));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 	}
 	

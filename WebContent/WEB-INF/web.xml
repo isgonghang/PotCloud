@@ -163,6 +163,18 @@
     <servlet-name>StopHeating</servlet-name>
     <url-pattern>/stopheating</url-pattern>
   </servlet-mapping>
+  <!-- Socket Servlet HelloWorld -->
+  <servlet>  
+    <servlet-name>HelloWorld</servlet-name>  
+    <servlet-class>com.pot.socket.HelloWorld</servlet-class>  
+    <load-on-startup>0</load-on-startup>
+  </servlet>  
+  
+  <servlet-mapping>  
+    <servlet-name>HelloWorld</servlet-name>  
+    <url-pattern>/HelloWorld</url-pattern>  
+  </servlet-mapping>  
+  
 </web-app>
 
 
