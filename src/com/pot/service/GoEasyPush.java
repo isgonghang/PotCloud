@@ -2,8 +2,6 @@ package com.pot.service;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
-import com.pot.push.PushInfo2Android;
-
 import io.goeasy.GoEasy;
 import io.goeasy.publish.GoEasyError;
 import io.goeasy.publish.PublishListener;

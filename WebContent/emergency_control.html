@@ -73,50 +73,6 @@
     
     <script src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
     <script>
-		var goEasy = new GoEasy({
-        	appkey: 'BC-9a8299840a374746a3dbc5281310cefc'
-    	});
-		$(document).ready(function(){
-			goEasy.subscribe({
-				channel: "my_channel",
-				onMessage: function (message) {
-					alert("已成功获取到新的设备信息！");
-
-                    var jsons = $.parseJSON(message.content);
-                    console.log(message.content);
-                    $("#temperature").html(jsons.temperature);
-                    $("#pressure").html(jsons.pressure);
-                    //时间戳转换为标准格式
-
-                    var hour = (jsons.time) / 60;
-                    var maxtime = hour * 60; //一个小时，按秒计算，自己调整!   
-                    function CountDown() {
-                        if (maxtime >= 0) {
-                            minutes = Math.floor(maxtime / 60);
-                            seconds = Math.floor(maxtime % 60);
-                            msg = "距离结束还有" + minutes + "分" + seconds + "秒";
-                            document.all["timer"].innerHTML = msg;
-                            if (maxtime == 5 * 60)alert("还剩5分钟");
-                                --maxtime;
-                        } else{
-                            clearInterval(timer);
-                            alert("时间到，结束!");
-                        }
-                    }
-                    timer = setInterval(CountDown, 1000);  
-
-				},
-				onSuccess: function () {
-					alert("设备连接成功");
-				},
-				onFailed: function (error) {
-					alert("设备连接失败, 错误编码：" + error.code + " 错误信息：" + error.content)
-				}
-			});
-
-		});
-
-
             $("#stop").click(function(){
                 var result = confirm("确定要紧急停止吗？");
                 if (result = true) {

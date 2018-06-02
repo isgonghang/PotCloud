@@ -2,6 +2,7 @@ package com.pot.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.pot.bean.AndroidControlInfo;
 import com.pot.service.GoEasyPush;
+import com.pot.socket.SendThread;
 import com.pot.socket.ServerSocketThreadTest;
 
+import anetwork.channel.aidl.Connection;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class GetAndroidControlInfo extends HttpServlet implements Runnable {
+	public static String strs;
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		// 设置请求和响应编码文件格式
@@ -28,7 +32,15 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 		// 接收客户端传过来的参数
 		System.out.println("Get");
 		String jsonStr = request.getParameter("start");
+		Socket connection=ServerSocketThreadTest.getcSocket();
+		SendThread sendThread=new SendThread(connection);
+		sendThread.setString(jsonStr);
+		sendThread.start();
+		
 		System.out.println(jsonStr);
+		strs = "asd";
+		new ServerSocketThreadTest().setJsonStr(jsonStr);;
+		
 		
 		// 通过调用GoEasyPush类将信息主动推送到浏览器
 		GoEasyPush goEasyPush = new GoEasyPush();
