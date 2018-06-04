@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.pot.bean.DynamicRecipes;
 import com.pot.bean.RecipesDetail;
 import com.pot.bean.RecipesDetail;
 
@@ -141,6 +142,7 @@ public class RecipesDetailDao {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(" select * from recipesdetail where 1=1 ");
+
 //		sb.append(" where name=? and id=? ");
 //		sb.append(" where name like ? and id like ? ");
 		if(params != null && params.size() > 0) {
@@ -175,4 +177,5 @@ public class RecipesDetailDao {
 		}
 		return result;	
 	}
+
 }

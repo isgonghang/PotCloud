@@ -19,7 +19,7 @@ import java.net.Socket;
       public void setConnection(Socket connection) {
 		this.connection = connection;
 	}
-    public void run(){  
+    public void run(){
         try {  
               
             System.out.println("****成功接收到客户端发送的消息******");  
@@ -34,8 +34,11 @@ import java.net.Socket;
             System.out.println();  
               
             //向客户端写入数据  
-            writeMsgToClient(connection.getOutputStream(),string);  
-              
+            if (connection.getOutputStream() == null) {
+				System.out.println("输出为空");
+			} else {
+				writeMsgToClient(connection.getOutputStream(),string);  
+			} 
             connection.close();  
         } catch (Exception e) {  
             e.printStackTrace();  

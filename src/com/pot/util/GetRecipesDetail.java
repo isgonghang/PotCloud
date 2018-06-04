@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pot.bean.RecipesDetail;
+import com.pot.controller.DynamicRecipesAction;
 import com.pot.controller.RecipesDetailAction;
 
 import net.sf.json.JSONArray;

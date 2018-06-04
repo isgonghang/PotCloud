@@ -18,9 +18,8 @@ import com.pot.util.GetAndroidControlInfo;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.umeng.qq.tencent.Info;
 
-/* Socket服务器端开启线程测试类  
-* 
-* @date Jul 14, 2016 11:35:32 AM  
+/*  
+* Socket服务器端开启线程测试类  
 */ 
 public class ServerSocketThreadTest {
 	private String jsonStr;
@@ -59,10 +58,10 @@ public static Socket getcSocket() {
             while(true){  
                 System.out.println("等待客户端连接并发送数据...");  
                 //接收客户端连接的socket对象  
-               Socket  connection =null;  
+                Socket connection =null;  
                 //接收客户端传过来的数据，会阻塞  
                 connection=serverSocket.accept();  
-               cSocket=connection;
+                cSocket=connection;
                 
             }  
         } catch (Exception e) {  

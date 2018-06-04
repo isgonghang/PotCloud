@@ -37,9 +37,9 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 		sendThread.setString(jsonStr);
 		sendThread.start();
 		
-		System.out.println(jsonStr);
-		strs = "asd";
-		new ServerSocketThreadTest().setJsonStr(jsonStr);;
+//		System.out.println(jsonStr);
+//		strs = "asd";
+//		new ServerSocketThreadTest().setJsonStr(jsonStr);
 		
 		
 		// 通过调用GoEasyPush类将信息主动推送到浏览器
@@ -53,25 +53,11 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 		
 		// 将信息输出打印到浏览器中
 		PrintWriter printWriter = response.getWriter();
-		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);
-		
-		// 将参数解析成json格式
-		Gson gson = new Gson();
-		AndroidControlInfo androidControlInfo = gson.fromJson(jsonStr, AndroidControlInfo.class);
-		
-		Integer temerature = androidControlInfo.getTemperature();
-		Integer pressure = androidControlInfo.getPressure();
-		Long time = androidControlInfo.getTime();
-		
-		String info = time + "," + pressure + "," + time;
-		
-				
+		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);		
 		
 		printWriter.flush();
 		printWriter.close();
 		
-
-
 	}
 		
 	@Override

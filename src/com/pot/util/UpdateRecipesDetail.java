@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.google.gson.Gson;
+import com.pot.bean.DynamicRecipes;
 import com.pot.bean.RecipesDetail;
+import com.pot.bean.SpecialDynamicRecipes;
+import com.pot.controller.DynamicRecipesAction;
 import com.pot.controller.RecipesDetailAction;
+import com.pot.controller.SpecialDynamicRecipesAction;
 
 /*
  * 上传云食谱
@@ -33,12 +37,19 @@ public class UpdateRecipesDetail extends HttpServlet {
 		String jsonStr = request.getParameter("recipe");
 		Gson gson = new Gson();
 		RecipesDetail recipesdetail = gson.fromJson(jsonStr, RecipesDetail.class);
+		SpecialDynamicRecipes specialDynamicRecipes = gson.fromJson(jsonStr, SpecialDynamicRecipes.class);
 		
 		RecipesDetailAction action = new RecipesDetailAction(); //获取数据库连接方法
+		SpecialDynamicRecipesAction action2 = new SpecialDynamicRecipesAction();
+		
+		SpecialDynamicRecipes sd = new SpecialDynamicRecipes();
 		RecipesDetail r = new RecipesDetail(); //向数据库添加数据
 		
 		Long recipeid = recipesdetail.getRecipeId();
+		Long id = recipesdetail.getRecipeId();
+		
 		String image = recipesdetail.getImage();
+		String image2 = recipesdetail.getImage();
 
 		Float score = recipesdetail.getScore();
 		Integer time = recipesdetail.getTime();
@@ -51,10 +62,14 @@ public class UpdateRecipesDetail extends HttpServlet {
 		r.setTime(time);
 		r.setSource(source);
 		r.setOther(other);
+		//将recipedetail上传的id和img存储到dynamicrecipes数据库
+		sd.setId(id);
+		sd.setCount_image(image2);
 		
 
 		try {
 			action.add(r);
+			action2.add(sd);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -24,7 +24,7 @@ public class ServerSocketTest {
     public static void testCommon(){  
         ServerSocket serverSocket=null;  
         try {  
-            serverSocket = new ServerSocket(22);  
+            serverSocket = new ServerSocket(5000);  
             while(true){  
                 System.out.println("wait receive message from client...");  
                 //接收客户端连接的socket对象  

@@ -18,8 +18,10 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import com.google.gson.Gson;
 import com.pot.bean.DynamicRecipes;
 import com.pot.bean.RecipesDetail;
+import com.pot.bean.SpecialDynamicRecipes;
 import com.pot.controller.DynamicRecipesAction;
 import com.pot.controller.RecipesDetailAction;
+import com.pot.controller.SpecialDynamicRecipesAction;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -37,6 +39,8 @@ public class GetDynamicRecipes extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		DynamicRecipesAction action = new DynamicRecipesAction(); //获取数据库连接方法
+		SpecialDynamicRecipesAction action2 = new SpecialDynamicRecipesAction();
+		RecipesDetailAction action3 = new RecipesDetailAction();
 		
 		//将查询结果转换为json格式
 		JSONArray jsonarray = new JSONArray();
@@ -45,10 +49,12 @@ public class GetDynamicRecipes extends HttpServlet {
 		//全部查询
 		try {
 			List<DynamicRecipes> result = action.query();
-			
+			List<SpecialDynamicRecipes> result2 = action2.query();
+			List<RecipesDetail> result3 = action3.query();
+
 			for (int i = 0; i < result.size(); i++) {
-				jsonobj.put("id", result.get(i).getId());
-				jsonobj.put("count_image", result.get(i).getCount_image());
+				jsonobj.put("recipeId", result3.get(i).getRecipeId());
+				jsonobj.put("count_image", result3.get(i).getImage());
 				jsonobj.put("circle_image", result.get(i).getCircle_image());
 				jsonobj.put("name", result.get(i).getName());
 				jsonobj.put("like_count", result.get(i).getLike_count());

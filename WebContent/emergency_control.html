@@ -76,7 +76,22 @@
             $("#stop").click(function(){
                 var result = confirm("确定要紧急停止吗？");
                 if (result = true) {
-                    alert("You pressed OK!");
+                    alert("已成功停止！");
+                    $.ajax({
+                        url : "http://172.20.10.6:8080/Pot/emergencystop",
+                        method : "GET",
+                        success : function(){
+                            alert("已成功停止！");
+                        }
+                    }),
+                    $.ajax({
+                        url : "http://localhost:8080/Pot/emergencystop",
+                        method : "GET",
+                        success : function(){
+                            alert("已成功停止！");
+                        }
+                    })
+                    console.log("已成功停止！")
                 } else {
                     alert("You pressed Cancel!");
                 }

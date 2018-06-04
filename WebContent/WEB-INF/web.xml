@@ -163,18 +163,19 @@
     <servlet-name>StopHeating</servlet-name>
     <url-pattern>/stopheating</url-pattern>
   </servlet-mapping>
-  <!-- Socket Servlet HelloWorld -->
-  <servlet>  
-    <servlet-name>HelloWorld</servlet-name>  
-    <servlet-class>com.pot.socket.HelloWorld</servlet-class>  
-    <load-on-startup>0</load-on-startup>
-  </servlet>  
-  
-  <servlet-mapping>  
-    <servlet-name>HelloWorld</servlet-name>  
-    <url-pattern>/HelloWorld</url-pattern>  
-  </servlet-mapping>  
-  
+  <!-- 网页紧急停止--> 
+  <servlet>
+    <servlet-name>EmergencyStop</servlet-name>
+    <servlet-class>com.pot.util.EmergencyStop</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmergencyStop</servlet-name>
+    <url-pattern>/emergencystop</url-pattern>
+  </servlet-mapping>
+<!-- Socket随Tomcat启动 --> 
+  <listener> 
+　　  <listener-class>com.pot.socket.SocketServiceLoader</listener-class> 
+  </listener>
 </web-app>
 
 

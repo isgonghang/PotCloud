@@ -249,7 +249,7 @@ public class JiguangPush{
     public static void main(String[] args)  
     {  
     	// 向Android手机发送停止通知
-    	new JiguangPush().sendAllsetNotification("压力锅温度过高，已紧急停止。。。。");  
+    	JiguangPush.sendAllsetNotification("压力锅温度过高，已紧急停止。。。。");  
 //         List<String> sendAlias = new ArrayList<>();  
 //         sendAlias.add("1001");  
 //         new JiguangPush().sendAlias("这是java后台发送的一个按照alia的通知", sendAlias);  
