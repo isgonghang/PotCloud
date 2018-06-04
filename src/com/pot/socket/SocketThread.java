@@ -33,7 +33,7 @@ public class SocketThread extends Thread {
 
 	} 
 
-	private Socket socket;
+	public static Socket socket;
 	public void run(){ 
 		while(!this.isInterrupted()){ 
 			try { 

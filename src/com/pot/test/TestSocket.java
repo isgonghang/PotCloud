@@ -8,28 +8,28 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import com.pot.socket.SocketThread;
 
 public class TestSocket {
-	public static void main(String[] args) throws Exception {
+	 
+    public static void main(String[] args) {  
         try {  
-            ServerSocket server = new ServerSocket(5000);  
-            System.out.println("Server start!");  
-            Socket socket = server.accept(); //阻塞等待, 直到一个客户端 socket过来  
-            System.out.println("There comes a socket!");  
-            BufferedReader in = new BufferedReader(new InputStreamReader(  
-                    socket.getInputStream())); //输入，from 客户端  
-            PrintWriter out = new PrintWriter(socket.getOutputStream()); //输出，to 客户端  
-            System.out.println(in.readLine());  // 打印 客户 socket 发过来的字符，按行(\n,\r,或\r\n)  
-            out.println("Server reponse! ^_^ ");   
-            out.flush(); // to 客户端，输出  
+            Socket socket = new Socket("172.20.10.6", 5000);  
+            System.out.println("Client start!");  
+            PrintWriter out = new PrintWriter(socket.getOutputStream()); // 输出，to 服务器 socket  
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // 输入， from 服务器 socket  
+            out.println("Client request! :-) ");  
+            out.flush(); // 刷缓冲输出，to 服务器  
+            System.out.println(in.readLine()); // 打印服务器发过来的字符串  
+            System.out.println("Client end!");  
             socket.close();  
-            server.close();  
-            System.out.println("Server end!");  
+        } catch (UnknownHostException e) {  
+            e.printStackTrace();  
         } catch (IOException e) {  
             e.printStackTrace();  
-        } 
-
-	}
+        }  
+  
+    }  
 }

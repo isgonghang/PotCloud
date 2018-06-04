@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.pot.push.JiguangPush;
+
 /*
  * 基于TCP协议的Socket通信  
  * 客户端
@@ -23,7 +25,7 @@ public class TcpSocketClient {
 			// 2.获取输出流，用来向服务器端发送信息
 			OutputStream outputStream = socket.getOutputStream(); // 字节输入流
 			PrintWriter printWriter = new PrintWriter(outputStream); //将输出流包装为打印流
-			printWriter.write("temperature:25,time:200,user:gh,location:xian");
+			printWriter.write("{\"time\"：35,\"pressure\":22,\"time\":1200}\n");
 			printWriter.flush(); // 刷新缓存
 			
 			
@@ -35,7 +37,7 @@ public class TcpSocketClient {
 			while((info = bufferedReader.readLine()) != null) { // 每次读取服务端响应信息一行，循环读取信息
 				System.out.println(info);
 			}
-			
+			System.out.println("结束输入");
 			// 4.关闭资源
 			bufferedReader.close();
 			inputStream.close();

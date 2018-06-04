@@ -22,12 +22,12 @@ import java.net.Socket;
     public void run(){
         try {  
               
-            System.out.println("****成功接收到客户端发送的消息******");  
               
             //读取客户端传过来的数据  
             if (connection.getInputStream() == null) {
 				System.out.println("输入为空");
 			} else {
+				System.out.println("****成功接收到客户端发送的消息******"); 
 				readMessageFromClient(connection.getInputStream());  
 			}              
             System.out.println("****客户端发送消息结束******");  

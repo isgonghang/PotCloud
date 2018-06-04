@@ -36,7 +36,8 @@ public class Python2JavaSocket {
 			"	IO.cleanup()\r\n" + 
 			"init()\r\n" + 
 			"test()\r\n" + 
-			"clean()";
+			"clean()" +
+			"";
 	
     public static void main(String[] args) {  
         try {  
@@ -57,6 +58,7 @@ public class Python2JavaSocket {
         		while((info=br.readLine())!=null){
         			System.out.println("我是服务器，客户端说："+info);
         		}
+        		System.out.println("结束输入");
         		socket.shutdownInput();//关闭输入流
         		
         		//4、获取输出流，响应客户端的请求

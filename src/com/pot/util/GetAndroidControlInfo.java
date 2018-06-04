@@ -1,6 +1,7 @@
 package com.pot.util;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
@@ -15,6 +16,8 @@ import com.pot.bean.AndroidControlInfo;
 import com.pot.service.GoEasyPush;
 import com.pot.socket.SendThread;
 import com.pot.socket.ServerSocketThreadTest;
+import com.pot.socket.SocketOperate;
+import com.pot.socket.SocketThread;
 
 import anetwork.channel.aidl.Connection;
 import net.sf.json.JSONArray;
@@ -22,20 +25,32 @@ import net.sf.json.JSONObject;
 
 public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 	public static String strs;
+	private Socket socket;
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		// 设置请求和响应编码文件格式
+		System.out.println("执行doget");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
 		// 接收客户端传过来的参数
-		System.out.println("Get");
+		
 		String jsonStr = request.getParameter("start");
-		Socket connection=ServerSocketThreadTest.getcSocket();
-		SendThread sendThread=new SendThread(connection);
-		sendThread.setString(jsonStr);
-		sendThread.start();
+//		System.out.println(jsonStr);
+		
+		Socket connection=SocketThread.socket;
+
+		if (connection!=null) {
+			System.out.println("connection非空");
+			SocketOperate socketOperate=new SocketOperate(connection);
+			socketOperate.setResponse(response);
+			socketOperate.start();
+		}
+		
+		
+
+
 		
 //		System.out.println(jsonStr);
 //		strs = "asd";
@@ -52,11 +67,11 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 //		serverSocket.writeMsgToClient(connection.getOutputStream(),"我是服务器发来的消息!!!");
 		
 		// 将信息输出打印到浏览器中
-		PrintWriter printWriter = response.getWriter();
-		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);		
-		
-		printWriter.flush();
-		printWriter.close();
+//		PrintWriter printWriter = response.getWriter();
+//		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);		
+//		
+//		printWriter.flush();
+//		printWriter.close();
 		
 	}
 		
