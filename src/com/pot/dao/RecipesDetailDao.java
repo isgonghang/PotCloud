@@ -35,7 +35,7 @@ public class RecipesDetailDao {
 		ptmt.setInt(4, rd.getTime());
 		ptmt.setString(5, rd.getSource());
 		ptmt.setString(6, rd.getOther());
-//		ptmt.setTreeMap(7, rd.getMap());
+
 		
 		//调用execute()执行改sql语句
 		ptmt.execute();
@@ -76,7 +76,8 @@ public class RecipesDetailDao {
 		ptmt.setInt(4, rd.getTime());
 		ptmt.setString(5, rd.getSource());
 		ptmt.setString(6, rd.getOther());
-		
+
+
 		//调用execute()执行改sql语句
 		ptmt.execute();
 	}
@@ -86,7 +87,7 @@ public class RecipesDetailDao {
 		//获得数据库连接
 		Connection conn = DBUtil.getConnection();
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select recipeid,image,score,time,source,other from recipesdetail ");
+		ResultSet rs = stmt.executeQuery("select * from recipesdetail ");
 		
 		List<RecipesDetail> rd = new ArrayList<RecipesDetail>();
 		RecipesDetail r = null;
@@ -99,6 +100,7 @@ public class RecipesDetailDao {
 			r.setTime(rs.getInt("time"));
 			r.setSource(rs.getString("source"));
 			r.setOther(rs.getString("other"));
+			
 		
 			rd.add(r);
 		}
@@ -130,6 +132,8 @@ public class RecipesDetailDao {
 			rd.setTime(rs.getInt("time"));
 			rd.setSource(rs.getString("source"));
 			rd.setOther(rs.getString("other"));
+
+			
 		}
 		return rd;
 	}

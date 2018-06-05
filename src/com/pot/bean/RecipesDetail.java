@@ -47,13 +47,13 @@ public class RecipesDetail {
 	public void setOther(String other) {
 		this.other = other;
 	}
+
 	public TreeMap<Integer, Float> getMap() {
 		return map;
 	}
 	public void setMap(TreeMap<Integer, Float> map) {
 		this.map = map;
 	}
-	
 	@Override
 	public String toString() {
 		return "RecipesDetail [recipeId=" + recipeId + ", image=" + image + ", score=" + score + ", time=" + time

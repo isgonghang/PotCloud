@@ -176,6 +176,18 @@
   <listener> 
 　　  <listener-class>com.pot.socket.SocketServiceLoader</listener-class> 
   </listener>
+  
+  <servlet>  
+        <servlet-name>HelloWorld</servlet-name>  
+        <servlet-class>com.pot.test.Socket2ServletTest</servlet-class>  
+        <load-on-startup>0</load-on-startup>   
+   </servlet>  
+  
+   <servlet-mapping>  
+        <servlet-name>HelloWorld</servlet-name>  
+        <url-pattern>/test</url-pattern>  
+   </servlet-mapping> 
+  
 </web-app>
 
 

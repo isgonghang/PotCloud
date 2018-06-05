@@ -21,6 +21,7 @@ import com.pot.push.JiguangPush;
 public class SocketOperate extends Thread {
 	private Socket socket;
 	private HttpServletResponse response;
+	private HttpServletRequest request;
 
 	public SocketOperate(Socket socket) {
 		this.socket = socket;
@@ -30,6 +31,7 @@ public class SocketOperate extends Thread {
 	public void setResponse(HttpServletResponse response) {
 		this.response = response;
 	}
+	
 
 	public void run() {
 		try {
@@ -37,22 +39,28 @@ public class SocketOperate extends Thread {
 					+ "      成功调用数据接收发送处理类，开始进行数据的接收和发送！\n" + "\n" + "***************************************");
 
 			// 3、获取输入流，并读取客户端信息
-//			InputStream is = socket.getInputStream();
-//			InputStreamReader isr = new InputStreamReader(is);
-//			BufferedReader br = new BufferedReader(isr);
-//
-//			String info = br.readLine();
-		//	System.out.println(info);
+			InputStream is = socket.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+
+			String info = br.readLine(); //提取服务器端响应信息
+//			while((info = br.readLine()) != null) { // 每次读取服务端响应信息一行，循环读取信息
+
+
+//			}
+			System.out.println(info);
+			
+
 			if (response != null) {
 				System.out.println("response 非空");
+				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter printWriter = response.getWriter();
-				printWriter.write(handle("555"));
+				printWriter.write(handle(info));
 
-				printWriter.flush();
+//				printWriter.flush();
 				printWriter.close();
 			}
 
-			//System.out.println(info);
 			System.out.println("******已结束接收数据******");
 
 			// 4、获取输出流，响应客户端的请求
@@ -68,14 +76,14 @@ public class SocketOperate extends Thread {
 			System.out.println("******已结束发送数据******");
 			pw.flush();
 
-			// //5、关闭资源
-			// pw.close();
-			// os.close();
-			// socket.shutdownOutput();
-			// br.close();
-			// isr.close();
-			// is.close();
-			// socket.shutdownInput();
+			 //5、关闭资源
+			 pw.close();
+			 os.close();
+			 socket.shutdownOutput();
+			 br.close();
+			 isr.close();
+			 is.close();
+			 socket.shutdownInput();
 
 		} catch (IOException ex) {
 
@@ -85,9 +93,8 @@ public class SocketOperate extends Thread {
 	}
 
 	public static String handle(String jsonStr) {
-		String result = "";
-		result = "来自设备的json数据";
-		return jsonStr+result;
+		String result = "来自设备的json数据：";
+		return result+jsonStr;
 	}
 
 }

@@ -38,6 +38,7 @@ public class TcpSocketClient {
 				System.out.println(info);
 			}
 			System.out.println("结束输入");
+			
 			// 4.关闭资源
 			bufferedReader.close();
 			inputStream.close();

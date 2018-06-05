@@ -20,6 +20,7 @@ public class SocketThread extends Thread {
 	public SocketThread(ServerSocket serverScoket){ 
 		try { 
 			if(serverSocket == null){ 
+				//开启Socket服务器端5000端口
 				serverSocket = new ServerSocket(5000); 
 				System.out.println("*****************************\n" 
 									+ "\n" 
@@ -44,10 +45,11 @@ public class SocketThread extends Thread {
 						+ "\n" +  "***************************************");
 
 				if(socket != null && !socket.isClosed()){ 
-					//处理接受的数据 
+					//启动发送数据和处理接受的数据类 
 					new SocketOperate(socket).start(); 
+					System.out.println("operate start");
 				} 
-			socket.setSoTimeout(30000); 
+//			socket.setSoTimeout(30000); 
 
 			}catch (Exception e) { 
 				e.printStackTrace(); 	

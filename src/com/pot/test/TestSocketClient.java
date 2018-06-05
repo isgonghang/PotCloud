@@ -13,7 +13,7 @@ public class TestSocketClient {
 	public static void main(String[] args) {
         try {
             //创建客户端Socket，指定服务器地址和端口
-            Socket socket = new Socket("172.20.10.6", 6000);
+            Socket socket = new Socket("localhost", 30000);
             //建立连接后，获取输出流，向服务器端发送信息
             OutputStream os = socket.getOutputStream();
             //输出流包装为打印流

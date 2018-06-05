@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.pot.bean.AndroidControlInfo;
 import com.pot.service.GoEasyPush;
-import com.pot.socket.SendThread;
-import com.pot.socket.ServerSocketThreadTest;
 import com.pot.socket.SocketOperate;
 import com.pot.socket.SocketThread;
 
@@ -46,25 +44,21 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 			SocketOperate socketOperate=new SocketOperate(connection);
 			socketOperate.setResponse(response);
 			socketOperate.start();
+			System.out.println("connection start");
 		}
 		
 		
 
 
 		
-//		System.out.println(jsonStr);
-//		strs = "asd";
-//		new ServerSocketThreadTest().setJsonStr(jsonStr);
+
 		
 		
 		// 通过调用GoEasyPush类将信息主动推送到浏览器
 		GoEasyPush goEasyPush = new GoEasyPush();
 		goEasyPush.PushInfo(jsonStr);
 		
-		//向Socket中发送数据
-//		ServerSocketThreadTest serverSocket = new ServerSocketThreadTest();
-//		SubThread subThread = new SubThread();
-//		serverSocket.writeMsgToClient(connection.getOutputStream(),"我是服务器发来的消息!!!");
+
 		
 		// 将信息输出打印到浏览器中
 //		PrintWriter printWriter = response.getWriter();

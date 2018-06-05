@@ -63,8 +63,8 @@ public class UpdateRecipesDetail extends HttpServlet {
 		r.setSource(source);
 		r.setOther(other);
 		//将recipedetail上传的id和img存储到dynamicrecipes数据库
-		sd.setId(id);
-		sd.setCount_image(image2);
+		sd.setId(recipeid);
+		sd.setCount_image(image);
 		
 
 		try {
