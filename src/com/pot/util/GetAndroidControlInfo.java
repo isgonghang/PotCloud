@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.pot.bean.AndroidControlInfo;
 import com.pot.service.GoEasyPush;
+import com.pot.socket.SocketInfoWriter;
 import com.pot.socket.SocketOperate;
 import com.pot.socket.SocketThread;
 
@@ -27,7 +28,6 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		// 设置请求和响应编码文件格式
-		System.out.println("执行doget");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
@@ -35,15 +35,20 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 		// 接收客户端传过来的参数
 		
 		String jsonStr = request.getParameter("start");
-//		System.out.println(jsonStr);
+		System.out.println(jsonStr);
 		
-		Socket connection=SocketThread.socket;
+		Socket connection = SocketThread.socket;
 
 		if (connection!=null) {
 			System.out.println("connection非空");
 			SocketOperate socketOperate=new SocketOperate(connection);
+
+			SocketInfoWriter writer = new SocketInfoWriter(connection);
+			writer.setInfo(jsonStr);
+			writer.getInfo();
 			socketOperate.setResponse(response);
 			socketOperate.start();
+
 			System.out.println("connection start");
 		}
 		

@@ -35,57 +35,17 @@ public class SocketOperate extends Thread {
 
 	public void run() {
 		try {
-			System.out.println("***************************************\n" + "\n"
-					+ "      成功调用数据接收发送处理类，开始进行数据的接收和发送！\n" + "\n" + "***************************************");
+			System.out.println("________________________________________\n" + "\n"
+					+ "      成功调用数据接收发送处理类，开始进行数据的接收和发送！\n" + "\n" 
+					+ "________________________________________");
 
-			// 3、获取输入流，并读取客户端信息
-			InputStream is = socket.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is);
-			BufferedReader br = new BufferedReader(isr);
-
-			String info = br.readLine(); //提取服务器端响应信息
-//			while((info = br.readLine()) != null) { // 每次读取服务端响应信息一行，循环读取信息
-
-
-//			}
-			System.out.println(info);
+            // 创建一个写线程
+            new SocketInfoWriter(socket).start();
+//            System.out.println("____________write success____________");
+            // 创建一个读线程
+//            new SocketInfoReader(socket).start();
+//            System.out.println("____________read success____________");
 			
-
-			if (response != null) {
-				System.out.println("response 非空");
-				response.setContentType("text/html;charset=UTF-8");
-				PrintWriter printWriter = response.getWriter();
-				printWriter.write(handle(info));
-
-//				printWriter.flush();
-				printWriter.close();
-			}
-
-			System.out.println("******已结束接收数据******");
-
-			// 4、获取输出流，响应客户端的请求
-			OutputStream os = socket.getOutputStream();
-			PrintWriter pw = new PrintWriter(os);
-			pw.println("import time\r\n" + "channels = [6,13,19,26]\r\n" + "def init():\r\n"
-					+ "	IO.setmode(IO.BCM)\r\n" + "	for x in channels:\r\n" + "		IO.setup(x,IO.OUn\"\r\n"
-					+ "def on(i):\r\n" + "	IO.output(IO.HIGH)\r\n" + "def off(i):\r\n" + "	IO.output(IO.LOW)\r\n"
-					+ "def ctrl(data):\r\n" + "	on(data)\r\n" + "	time.sleep(3)\r\n" + "	off(data)\r\n"
-					+ "def test():\r\n" + "	for i in channels:\r\n" + "		ctrl(i)\r\n"
-					+ "		time.sleep(0,1)	\r\n" + "def clean():\r\n" + "	IO.cleanup()\r\n" + "init()\r\n"
-					+ "test()\r\n" + "clean()\r\n");
-			System.out.println("******已结束发送数据******");
-			pw.flush();
-
-			 //5、关闭资源
-			 pw.close();
-			 os.close();
-			 socket.shutdownOutput();
-			 br.close();
-			 isr.close();
-			 is.close();
-			 socket.shutdownInput();
-
-		} catch (IOException ex) {
 
 		} finally {
 

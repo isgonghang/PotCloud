@@ -55,6 +55,11 @@ public class GetRecipesDetail extends HttpServlet {
 			TreeMap<Integer, Float> map2 = new TreeMap<>();
 			map2.put(0, (float) 15.0);
 			map2.put(10, (float) 25.0);
+			map2.put(20, (float) 35.0);
+			map2.put(30, (float) 50.0);
+			map2.put(45, (float) 65.0);
+			map2.put(60, (float) 75.0);
+			
 			result = action.query(params);
 			for (int i = 0; i < result.size(); i++) {
 				// 生成json
@@ -62,7 +67,7 @@ public class GetRecipesDetail extends HttpServlet {
 				jsonobj.put("image", result.get(i).getImage());
 				jsonobj.put("score", result.get(i).getScore());
 				jsonobj.put("time", result.get(i).getTime());
-				jsonobj.put("source", result.get(i).getSource());
+				jsonobj.put("source", (float) 6.6);
 				jsonobj.put("other", result.get(i).getOther());
 				jsonobj.put("map",String.valueOf(map2));
 				// jsonarray.add(jsonobj);

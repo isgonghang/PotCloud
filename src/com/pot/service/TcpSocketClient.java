@@ -19,13 +19,16 @@ public class TcpSocketClient {
 
 	public static void main(String[] args) {
 		try {
+			while (true) {
+				
+		
 			// 1.创建客户端Socket，指定服务器地址和端口
 			Socket socket = new Socket("localhost",5000);
 			
 			// 2.获取输出流，用来向服务器端发送信息
 			OutputStream outputStream = socket.getOutputStream(); // 字节输入流
 			PrintWriter printWriter = new PrintWriter(outputStream); //将输出流包装为打印流
-			printWriter.write("{\"time\"：35,\"pressure\":22,\"time\":1200}\n");
+			printWriter.write("{\"time\"：35,\"pressure\":22,\"time\":12000}\n");
 			printWriter.flush(); // 刷新缓存
 			
 			
@@ -45,7 +48,7 @@ public class TcpSocketClient {
 			printWriter.close();
 			outputStream.close();
 			socket.close();
-			
+			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
