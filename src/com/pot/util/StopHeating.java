@@ -40,7 +40,7 @@ public class StopHeating extends HttpServlet {
 				//启动写线程，向Socket写入判断返回数据指令
 				SocketInfoWriter writer = new SocketInfoWriter(connection);
 				
-				writer.setInfo(stop);
+				writer.setInfo("6\r\n");
 			
 			}
 			// 通过调用GoEasyPush类将信息主动推送到浏览器

@@ -51,11 +51,10 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 			//启动写线程，向Socket写入判断返回数据指令
 			SocketInfoWriter writer = new SocketInfoWriter(connection);
 			
-			writer.setInfo(jsonStr);
+			writer.setInfo("1\r\n" + jsonStr);
 			
-			//启动读线程，读取压力锅端返回数据
-			SocketInfoReader reader = new SocketInfoReader(connection);
-			System.out.println("servlet读取结束");
+//			//启动读线程，读取压力锅端返回数据
+//			SocketInfoReader reader = new SocketInfoReader(connection);
 
 			
 		}

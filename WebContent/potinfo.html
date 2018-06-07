@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>设备状态监控</title>
+    <meta name="keywords" content="设备状态监控">
+    <meta name="description" content="设备状态监控">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+                        <h2><span class="text-navy">压力锅反馈状态信息</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+
+                        <h4 class="m-b-xxs">压力锅设备信息&nbsp;&nbsp;<span class="label label-primary">新</span></h4>
+                        <br/>
+                        <br/>
+                        <span class="simple_tag">温度：<span id="temp">0</span>℃</span><br/>
+                        <span></span><br/>
+                        <span class="simple_tag">压力:<span id="pre">0</span>Kpa</span><br/>
+                        <span></span><br/>
+                        <span class="simple_tag">定时：<span id="timer">距离结束还有00分00秒</span></span>
+                        <div id="warring" style="color:red"></div>
+                        <div class="m-t-md">
+                            <div class="p-lg " style="margin-left: 10px">
+                                <a href="">
+                                    <img class="img-responsive img-shadow" src="./img/bg1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    
+    <script src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
+    <script>
+		var goEasy = new GoEasy({
+        	appkey: 'BC-adcc5f82eacf44e3b917ecae5e0c372b'
+    	});
+		$(document).ready(function(){
+			goEasy.subscribe({
+				channel: "my_channel",
+				onMessage: function (message) {
+					alert("已成功获取到新的设备信息！");
+
+                    var jsons = $.parseJSON(message.content);
+                    console.log(message.content);
+                    $("#pre").html(jsons.pre);
+                    $("#temp").html(jsons.temp);
+                    
+                    //时间戳转换为标准格式
+
+                    var hour = (jsons.time) / 60;
+                    var maxtime = hour * 60; //一个小时，按秒计算，自己调整!   
+                    function CountDown() {
+                        if (maxtime >= 0) {
+                            minutes = Math.floor(maxtime / 60);
+                            seconds = Math.floor(maxtime % 60);
+                            msg = "距离结束还有" + minutes + "分" + seconds + "秒";
+                            document.all["timer"].innerHTML = msg;
+                            if (maxtime == 5 * 60)alert("还剩5分钟");
+                                --maxtime;
+                        } else{
+                            clearInterval(timer);
+                            alert("时间到，结束!");
+                        }
+                    }
+                    timer = setInterval(CountDown, 1000);  
+
+				},
+				onSuccess: function () {
+					alert("设备连接成功");
+				},
+				onFailed: function (error) {
+					alert("设备连接失败, 错误编码：" + error.code + " 错误信息：" + error.content)
+				}
+			});
+
+		});
+
+    </script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+
+</body>
+
+</html>

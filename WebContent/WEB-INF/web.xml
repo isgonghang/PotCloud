@@ -196,6 +196,15 @@
     <url-pattern>/potinfo</url-pattern>
   </servlet-mapping>
   
+      <!-- 获取锅所有存储数据--> 
+  <servlet>
+    <servlet-name>UpdateAllPotInfo</servlet-name>
+    <servlet-class>com.pot.util.UpdateAllPotInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAllPotInfo</servlet-name>
+    <url-pattern>/updatepotinfo</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

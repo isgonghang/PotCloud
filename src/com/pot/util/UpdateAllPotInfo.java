@@ -1,10 +1,6 @@
 package com.pot.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 import javax.servlet.ServletException;
@@ -18,7 +14,7 @@ import com.pot.socket.SocketInfoWriter;
 import com.pot.socket.SocketOperate;
 import com.pot.socket.SocketThread;
 
-public class GetPotInfo extends HttpServlet {
+public class UpdateAllPotInfo extends HttpServlet {
 
 	private Socket socket;
 	@Override
@@ -40,21 +36,14 @@ public class GetPotInfo extends HttpServlet {
 
 			//启动写线程，向Socket写入判断返回数据指令
 			SocketInfoWriter writer = new SocketInfoWriter(connection);
-			writer.setInfo("5");
+			writer.setInfo("4");
 
 
 
 			SocketInfoReader readers = new SocketInfoReader(connection);
 			String infos = readers.getInfo();
 			System.out.println("获取到的返回值为" + infos);
-
-			
-			// 通过调用GoEasyPush类将信息主动推送到浏览器
-			GoEasyPush goEasyPush = new GoEasyPush();
-			goEasyPush.PushInfo(infos);
-		
-
-			
+	
 		}
 		
 		

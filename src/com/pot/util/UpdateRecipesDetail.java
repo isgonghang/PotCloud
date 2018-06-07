@@ -2,6 +2,8 @@ package com.pot.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,25 +18,26 @@ import com.pot.bean.SpecialDynamicRecipes;
 import com.pot.controller.DynamicRecipesAction;
 import com.pot.controller.RecipesDetailAction;
 import com.pot.controller.SpecialDynamicRecipesAction;
+import com.pot.socket.SocketInfoWriter;
+import com.pot.socket.SocketOperate;
+import com.pot.socket.SocketThread;
 
 /*
  * 上传云食谱
  */
 public class UpdateRecipesDetail extends HttpServlet {
+	private Socket socket;
+
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
-		
-		System.out.println("Get");
-		String value = request.getParameter("recipe");
-		System.out.println(value);
-		PrintWriter printWriter = response.getWriter();
-		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + value);
-		
+			
 		String jsonStr = request.getParameter("recipe");
+		System.out.println("手机端上传数据：" + jsonStr);
+		PrintWriter printWriter = response.getWriter();
+		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);
 		Gson gson = new Gson();
 		RecipesDetail recipesdetail = gson.fromJson(jsonStr, RecipesDetail.class);
 		SpecialDynamicRecipes specialDynamicRecipes = gson.fromJson(jsonStr, SpecialDynamicRecipes.class);
@@ -53,8 +56,9 @@ public class UpdateRecipesDetail extends HttpServlet {
 
 		Float score = recipesdetail.getScore();
 		Integer time = recipesdetail.getTime();
-		String source = recipesdetail.getSource();
+		String source = recipesdetail.getSource(); 
 		String other = recipesdetail.getOther();
+		TreeMap<Integer, Float> map = recipesdetail.getMap();
 		
 		r.setRecipeId(recipeid);
 		r.setImage(image);
@@ -74,6 +78,7 @@ public class UpdateRecipesDetail extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		printWriter.flush();
 		printWriter.close();
 

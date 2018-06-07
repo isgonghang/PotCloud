@@ -38,10 +38,10 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content text-center p-md">
                         <br/>
-                        <button id="stop" class="btn btn-sm btn-danger pull-right m-t-n-xs" type="submit" style="margin-right:490px;">
+                        <button id="stop" class="btn btn-sm btn-info pull-right m-t-n-xs" type="submit" style="margin-right:490px;">
                             <strong>
                                 &nbsp;<br/>
-                                &nbsp;&nbsp;紧急停止&nbsp;&nbsp;<br/>
+                                &nbsp;&nbsp;更新压力锅程序&nbsp;&nbsp;<br/>
                                 &nbsp;<br/>
                             </strong>
                         </button>
@@ -74,21 +74,21 @@
     <script src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
     <script>
             $("#stop").click(function(){
-                var result = confirm("确定要紧急停止吗？");
+                var result = confirm("确定要更新压力锅程序吗？");
                 if (result = true) {
-                    alert("已成功停止！");
+                    alert("已成功更新！");
                     $.ajax({
-                        url : "http://172.20.10.6:8080/Pot/emergencystop",
+                        url : "http://172.20.10.6:8080/Pot/sendcode",
                         method : "GET",
                     }),
                     // $.ajax({
-                    //     url : "http://localhost:8080/Pot/emergencystop",
+                    //     url : "http://localhost:8080/Pot/sendcode",
                     //     method : "GET",
                     //     success : function(){
-                    //         alert("已成功停止！");
+                    //         alert("已成功更新！");
                     //     }
                     // })
-                    console.log("已成功停止！")
+                    console.log("已成功更新！")
                 } else {
                     alert("You pressed Cancel!");
                 }
