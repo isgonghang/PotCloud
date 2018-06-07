@@ -2,6 +2,7 @@ package com.pot.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pot.service.GoEasyPush;
+import com.pot.socket.SocketInfoWriter;
+import com.pot.socket.SocketOperate;
+import com.pot.socket.SocketThread;
 
 public class StopHeating extends HttpServlet {
+	private Socket socket;
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 			int count = 0; //记录连接次数
@@ -18,22 +23,26 @@ public class StopHeating extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
-			System.out.println("getContentType: " + request.getContentType());  
-			System.out.println("getQueryString: " + request.getQueryString());  
-			System.out.println("getRemoteAddr: " + request.getRemoteAddr());  
-			System.out.println("getRemoteHost: " + request.getRemoteHost());  
-			System.out.println("getRemotePort: " + request.getRemotePort());  
-			System.out.println("getRemoteUser: " + request.getRemoteUser());  
-			System.out.println("getLocalAddr: " + request.getLocalAddr());  
-			System.out.println("getLocalName: " + request.getLocalName());  
-			System.out.println("getLocalPort: " + request.getLocalPort());  
-			System.out.println("getMethod: " + request.getMethod());  
-			System.out.println("-------request.getParamterMap()-------"); 
         
 			String stop = request.getParameter("stop");
 
 			System.out.println("获取到的控制命令为：" + stop);
 			
+			Socket connection = SocketThread.socket;
+
+			if (connection!=null) {
+				//启动数据读写处理线程
+
+				SocketOperate socketOperate=new SocketOperate(connection);
+				socketOperate.setResponse(response);
+				socketOperate.start();
+
+				//启动写线程，向Socket写入判断返回数据指令
+				SocketInfoWriter writer = new SocketInfoWriter(connection);
+				
+				writer.setInfo(stop);
+			
+			}
 			// 通过调用GoEasyPush类将信息主动推送到浏览器
 			GoEasyPush goEasyPush = new GoEasyPush();
 			goEasyPush.PushInfo(stop);

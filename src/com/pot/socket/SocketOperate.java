@@ -32,19 +32,18 @@ public class SocketOperate extends Thread {
 		this.response = response;
 	}
 	
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
 
 	public void run() {
 		try {
-			System.out.println("________________________________________\n" + "\n"
-					+ "      成功调用数据接收发送处理类，开始进行数据的接收和发送！\n" + "\n" 
-					+ "________________________________________");
+			System.out.println("\n" + "成功调用数据接收发送处理类，开始进行数据的接收和发送！\n" );
 
             // 创建一个写线程
             new SocketInfoWriter(socket).start();
-//            System.out.println("____________write success____________");
             // 创建一个读线程
-//            new SocketInfoReader(socket).start();
-//            System.out.println("____________read success____________");
+            new SocketInfoReader(socket).start();
 			
 
 		} finally {

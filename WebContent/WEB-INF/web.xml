@@ -176,17 +176,25 @@
   <listener> 
 　　  <listener-class>com.pot.socket.SocketServiceLoader</listener-class> 
   </listener>
-  
-  <servlet>  
-        <servlet-name>HelloWorld</servlet-name>  
-        <servlet-class>com.pot.test.Socket2ServletTest</servlet-class>  
-        <load-on-startup>0</load-on-startup>   
-   </servlet>  
-  
-   <servlet-mapping>  
-        <servlet-name>HelloWorld</servlet-name>  
-        <url-pattern>/test</url-pattern>  
-   </servlet-mapping> 
+
+  <!-- 发送程序--> 
+  <servlet>
+    <servlet-name>SendPythonCode</servlet-name>
+    <servlet-class>com.pot.util.SendPythonCode</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendPythonCode</servlet-name>
+    <url-pattern>/sendcode</url-pattern>
+  </servlet-mapping>
+    <!-- 获取锅温度压力嘻嘻--> 
+  <servlet>
+    <servlet-name>GetPotInfo</servlet-name>
+    <servlet-class>com.pot.util.GetPotInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetPotInfo</servlet-name>
+    <url-pattern>/potinfo</url-pattern>
+  </servlet-mapping>
   
 </web-app>
 

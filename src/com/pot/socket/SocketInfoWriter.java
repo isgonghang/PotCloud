@@ -9,11 +9,13 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class SocketInfoWriter extends Thread {
-	private PrintStream out;
 	private Socket socket;
 	private static String info;
 	
-	
+	public SocketInfoWriter(Socket socket) {
+		this.socket = socket;
+
+	}
 	public String getInfo() {
 		return info;
 	}
@@ -23,20 +25,12 @@ public class SocketInfoWriter extends Thread {
 		this.info = info;
 	}
 
-
-	public SocketInfoWriter(Socket socket) {
-		this.socket = socket;
-
-	}
-	
-
 	public void run() {
 		try {
 			OutputStream os = socket.getOutputStream();
 			PrintWriter pw = new PrintWriter(os);
 			pw.println(info);
-			System.out.println(info);
-			System.out.println("******已结束发送数据******");
+			System.out.println("\n" + "已结束发送数据" + info);
 			pw.flush();
 		} catch (IOException exc) {
 			exc.printStackTrace();

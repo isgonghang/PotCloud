@@ -28,8 +28,10 @@ public class TcpSocketClient {
 			// 2.获取输出流，用来向服务器端发送信息
 			OutputStream outputStream = socket.getOutputStream(); // 字节输入流
 			PrintWriter printWriter = new PrintWriter(outputStream); //将输出流包装为打印流
-			printWriter.write("{\"time\"：35,\"pressure\":22,\"time\":12000}\n");
+
+			printWriter.println("aaaaaa");
 			printWriter.flush(); // 刷新缓存
+			
 			
 			
 			// 3.获取输入流，并读取服务器端的响应信息

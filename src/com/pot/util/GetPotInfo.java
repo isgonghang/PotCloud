@@ -1,29 +1,23 @@
 package com.pot.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.pot.bean.AndroidControlInfo;
-import com.pot.service.GoEasyPush;
 import com.pot.socket.SocketInfoReader;
 import com.pot.socket.SocketInfoWriter;
 import com.pot.socket.SocketOperate;
 import com.pot.socket.SocketThread;
 
-import anetwork.channel.aidl.Connection;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-public class GetAndroidControlInfo extends HttpServlet implements Runnable {
+public class GetPotInfo extends HttpServlet {
 
 	private Socket socket;
 	@Override
@@ -32,11 +26,6 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
-		// 接收客户端传过来的参数
-		
-		String jsonStr = request.getParameter("start");
-//		System.out.println(jsonStr);
 		
 		Socket connection = SocketThread.socket;
 
@@ -50,28 +39,21 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 
 			//启动写线程，向Socket写入判断返回数据指令
 			SocketInfoWriter writer = new SocketInfoWriter(connection);
-			
-			writer.setInfo(jsonStr);
-			
-			//启动读线程，读取压力锅端返回数据
-			SocketInfoReader reader = new SocketInfoReader(connection);
-			System.out.println("servlet读取结束");
+			writer.setInfo("4");
+
+
+
+			SocketInfoReader readers = new SocketInfoReader(connection);
+			String infos = readers.getInfo();
+			System.out.println("获取到的返回值为" + infos);
+			if(infos != null) {
+
+			}
+		
 
 			
 		}
 		
-		// 通过调用GoEasyPush类将信息主动推送到浏览器
-		GoEasyPush goEasyPush = new GoEasyPush();
-		goEasyPush.PushInfo(jsonStr);
-		
-
-		
-//		// 将信息输出打印到浏览器中
-//		PrintWriter printWriter = response.getWriter();
-//		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);		
-//		
-//		printWriter.flush();
-//		printWriter.close();
 		
 	}
 		
@@ -80,10 +62,4 @@ public class GetAndroidControlInfo extends HttpServlet implements Runnable {
 		doGet(request, response);
 	}
 	
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
 }
