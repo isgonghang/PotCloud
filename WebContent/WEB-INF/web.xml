@@ -17,42 +17,7 @@
     <servlet-name>HelloServlet</servlet-name>
     <url-pattern>/Pot</url-pattern>
   </servlet-mapping>
-  <!--  -->
-  <servlet>
-    <servlet-name>Json</servlet-name>
-    <servlet-class>com.pot.util.Gsons</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Json</servlet-name>
-    <url-pattern>/json</url-pattern>
-  </servlet-mapping>
-  <!-- 食物菜单 -->
-  <servlet>
-    <servlet-name>FoodMenu</servlet-name>
-    <servlet-class>com.pot.util.SetFoodMenu</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FoodMenu</servlet-name>
-    <url-pattern>/foodmenu</url-pattern>
-  </servlet-mapping> 
-  <!-- 食物菜单详情 --> 
-  <servlet>
-    <servlet-name>FoodDetail</servlet-name>
-    <servlet-class>com.pot.util.SetFoodDetail</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FoodDetail</servlet-name>
-    <url-pattern>/fooddetail</url-pattern>
-  </servlet-mapping>
-  <!-- 解析URL --> 
-  <servlet>
-    <servlet-name>UrlParseHandler</servlet-name>
-    <servlet-class>com.pot.util.UrlParseHandler</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UrlParseHandler</servlet-name>
-    <url-pattern>/urlparse</url-pattern>
-  </servlet-mapping>
+
   <!-- Dwr服务器推送 --> 
   <listener>  
     <listener-class>org.directwebremoting.servlet.DwrListener</listener-class>  

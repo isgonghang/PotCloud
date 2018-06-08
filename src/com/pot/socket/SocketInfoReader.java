@@ -32,7 +32,6 @@ public class SocketInfoReader extends Thread {
 		SocketInfoReader.info = info;
 	}
 
-
 	public void run() {
 		try {
 			// 3、获取输入流，并读取客户端信息
@@ -45,7 +44,7 @@ public class SocketInfoReader extends Thread {
 
 			System.out.println("已结束读取数据" + info);
 			
-			//关闭资源
+//			//关闭资源
 //			br.close();
 //			isr.close();
 //			is.close();

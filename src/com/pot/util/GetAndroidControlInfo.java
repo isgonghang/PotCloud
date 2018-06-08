@@ -23,66 +23,36 @@ import anetwork.channel.aidl.Connection;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class GetAndroidControlInfo extends HttpServlet implements Runnable {
+public class GetAndroidControlInfo extends HttpServlet{
 
 	private Socket socket;
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		// 设置请求和响应编码文件格式
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
 		// 接收客户端传过来的参数
-		
 		String jsonStr = request.getParameter("start");
-//		System.out.println(jsonStr);
-		
+		System.out.println(jsonStr + "not auto");
+		//开启Socket线程
 		Socket connection = SocketThread.socket;
-
 		if (connection!=null) {
 			//启动数据读写处理线程
-
 			SocketOperate socketOperate=new SocketOperate(connection);
 			socketOperate.setResponse(response);
-			socketOperate.setRequest(request);
 			socketOperate.start();
-
-			//启动写线程，向Socket写入判断返回数据指令
+			//启动写线程，向Socket写入数据
 			SocketInfoWriter writer = new SocketInfoWriter(connection);
-			
 			writer.setInfo("1\r\n" + jsonStr);
-			
-//			//启动读线程，读取压力锅端返回数据
-//			SocketInfoReader reader = new SocketInfoReader(connection);
-
-			
-		}
-		
+		}		
 		// 通过调用GoEasyPush类将信息主动推送到浏览器
 		GoEasyPush goEasyPush = new GoEasyPush();
-		goEasyPush.PushInfo(jsonStr);
-		
-
-		
-//		// 将信息输出打印到浏览器中
-//		PrintWriter printWriter = response.getWriter();
-//		printWriter.write("你好，我是服务器,接收到的数据为：<br/>" + jsonStr);		
-//		
-//		printWriter.flush();
-//		printWriter.close();
-		
+		goEasyPush.PushInfo(jsonStr);	
 	}
 		
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
 }
