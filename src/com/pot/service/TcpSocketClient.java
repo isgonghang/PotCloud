@@ -29,7 +29,7 @@ public class TcpSocketClient {
 			OutputStream outputStream = socket.getOutputStream(); // 字节输入流
 			PrintWriter printWriter = new PrintWriter(outputStream); //将输出流包装为打印流
 
-			printWriter.println("aaaaaa");
+			printWriter.println("{\"temp\":35,\"pre\":25}");
 			printWriter.flush(); // 刷新缓存
 			
 			

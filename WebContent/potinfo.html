@@ -47,6 +47,15 @@
                         <span></span><br/>
                         <span class="simple_tag">定时：<span id="timer">距离结束还有00分00秒</span></span>
                         <div id="warring" style="color:red"></div>
+
+                        <button id="get" class="btn btn-sm btn-info pull-right m-t-n-xs" type="submit" style="margin-right:484px;margin-top: 20px;">
+                            <strong>
+                                &nbsp;<br/>
+                                &nbsp;&nbsp;获取数据&nbsp;&nbsp;<br/>
+                                &nbsp;<br/>
+                            </strong>
+                        </button>
+
                         <div class="m-t-md">
                             <div class="p-lg " style="margin-left: 10px">
                                 <a href="">
@@ -71,9 +80,27 @@
     
     <script src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
     <script>
-		var goEasy = new GoEasy({
-        	appkey: 'BC-adcc5f82eacf44e3b917ecae5e0c372b'
-    	});
+        var goEasy = new GoEasy({
+            appkey: 'BC-adcc5f82eacf44e3b917ecae5e0c372b'
+        });
+        $("#get").click(function(){
+                var result = confirm("确定要获取压力锅信息吗？");
+                if (result = true) {
+                    alert("已成功获取数据！");
+                    $.ajax({
+                        url : "http://172.20.10.6:8080/Pot/potinfo",
+                        method : "GET"
+                    }),
+
+                    console.log("已成功获取数据！")
+                } else {
+                    alert("You pressed Cancel!");
+                }
+            })
+
+
+
+		
 		$(document).ready(function(){
 			goEasy.subscribe({
 				channel: "my_channel",

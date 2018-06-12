@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pot.service.GoEasyPush;
+import com.pot.service.GoEasyPushPotInfo;
 import com.pot.socket.SocketInfoReader;
 import com.pot.socket.SocketInfoWriter;
 import com.pot.socket.SocketOperate;
@@ -37,21 +38,20 @@ public class GetPotInfo extends HttpServlet {
 			socketOperate.setResponse(response);
 			socketOperate.setRequest(request);
 			socketOperate.start();
+			
 
 			//启动写线程，向Socket写入判断返回数据指令
 			SocketInfoWriter writer = new SocketInfoWriter(connection);
 			writer.setInfo("5");
-
-
-
+			
 			SocketInfoReader readers = new SocketInfoReader(connection);
 			String infos = readers.getInfo();
 			System.out.println("获取到的返回值为" + infos);
-
-			
+		
 			// 通过调用GoEasyPush类将信息主动推送到浏览器
-			GoEasyPush goEasyPush = new GoEasyPush();
-			goEasyPush.PushInfo(infos);
+			GoEasyPushPotInfo goEasyPushPotInfo = new GoEasyPushPotInfo();
+			goEasyPushPotInfo.PushInfo(infos);
+			
 		
 
 			
