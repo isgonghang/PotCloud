@@ -39,21 +39,20 @@ public class SocketOperate extends Thread {
 	public void run() {
 		try {
 			System.out.println("\n" + "成功调用数据接收发送处理类，开始进行数据的接收和发送！\n" );
-
+			
+			if (this.request != null || this.response != null) {
+				
+			
             // 创建一个写线程
             new SocketInfoWriter(socket).start();
             // 创建一个读线程
             new SocketInfoReader(socket).start();
-			
+			}
 
 		} finally {
 
 		}
 	}
 
-	public static String handle(String jsonStr) {
-		String result = "来自设备的json数据：";
-		return result+jsonStr;
-	}
 
 }

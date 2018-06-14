@@ -47,7 +47,7 @@ public class SocketThread extends Thread {
 				if(socket != null && !socket.isClosed()){ 
 					//启动发送数据和处理接受的数据类 
 					new SocketOperate(socket).start(); 
-//					System.out.println("接收发送数据线程已经成功启动");
+					
 				} 
 //			socket.setSoTimeout(30000); 
 

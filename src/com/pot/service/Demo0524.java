@@ -20,7 +20,7 @@ public class Demo0524 {
 			PrintWriter out = new PrintWriter(socket.getOutputStream()); 
 			// 打印 客户 socket 发过来的字符，按行(\n,\r,或\r\n) 
 			System.out.println(in.readLine()); 
-			out.println("Server reponse! ^_^ "); 
+			out.println("5\r\n"); 
 			out.flush(); // to 客户端，输出 
 			socket.close(); 
 			server.close(); 

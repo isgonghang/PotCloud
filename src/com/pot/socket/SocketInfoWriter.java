@@ -32,8 +32,7 @@ public class SocketInfoWriter extends Thread {
 			pw.println(info);
 			System.out.println("\n" + "已结束发送数据" + info);
 			pw.flush();
-//			pw.close();
-//			os.close();
+
 		} catch (IOException exc) {
 			exc.printStackTrace();
 		}

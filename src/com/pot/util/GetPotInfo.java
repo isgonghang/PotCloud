@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.pot.service.GoEasyPush;
 import com.pot.service.GoEasyPushPotInfo;
 import com.pot.socket.SocketInfoReader;
@@ -33,26 +34,35 @@ public class GetPotInfo extends HttpServlet {
 
 		if (connection!=null) {
 			//启动数据读写处理线程
-
-			SocketOperate socketOperate=new SocketOperate(connection);
+			SocketOperate socketOperate = new SocketOperate(connection);
 			socketOperate.setResponse(response);
-			socketOperate.setRequest(request);
 			socketOperate.start();
+
+			try {
+				//启动写线程，向Socket写入判断返回数据指令
+				SocketInfoWriter writer = new SocketInfoWriter(connection);
+				writer.setInfo("5\r\n");
+				
+				writer.join();
+				
+				
+				SocketInfoReader reader = new SocketInfoReader(connection);
+				String infos = reader.getInfo();
+				System.out.println("获取到的返回数据为：" + infos);
+				
+				Gson gsons = new Gson();
+				String sendInfo = gsons.toJson(infos);
+				// 通过调用GoEasyPush类将信息主动推送到浏览器
+				GoEasyPushPotInfo goEasyPushPotInfo = new GoEasyPushPotInfo();
+				goEasyPushPotInfo.PushInfo(sendInfo);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			
 
-			//启动写线程，向Socket写入判断返回数据指令
-			SocketInfoWriter writer = new SocketInfoWriter(connection);
-			writer.setInfo("5");
 			
-			SocketInfoReader readers = new SocketInfoReader(connection);
-			String infos = readers.getInfo();
-			System.out.println("获取到的返回值为" + infos);
-		
-			// 通过调用GoEasyPush类将信息主动推送到浏览器
-			GoEasyPushPotInfo goEasyPushPotInfo = new GoEasyPushPotInfo();
-			goEasyPushPotInfo.PushInfo(infos);
-			
-		
 
 			
 		}
