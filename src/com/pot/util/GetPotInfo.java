@@ -59,15 +59,9 @@ public class GetPotInfo extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
 
-			
-
-			
 		}
-		
-		
+	
 	}
 		
 	@Override
