@@ -45,8 +45,9 @@
                         <span></span><br/>
                         <span class="simple_tag">压力:<span id="pre">0</span>Kpa</span><br/>
                         <span></span><br/>
-                        <span class="simple_tag">定时：<span id="timer">距离结束还有00分00秒</span></span>
-                        <div id="warring" style="color:red"></div>
+                        <span class="simple_tag">重量：<span id="weight">距离结束还有00分00秒</span></span>
+<!--                         <span class="simple_tag">定时：<span id="timer">距离结束还有00分00秒</span></span>
+ -->                    <div id="warring" style="color:red"></div>
 
                         <button id="get" class="btn btn-sm btn-info pull-right m-t-n-xs" type="submit" style="margin-right:484px;margin-top: 20px;">
                             <strong>
@@ -109,27 +110,28 @@
 
                     var jsons = $.parseJSON(message.content);
                     console.log(message.content);
-                    $("#pre").html(jsons.pre);
                     $("#temp").html(jsons.temp);
+                    $("#pre").html(jsons.pre);
+                    $("#weight").html(jsons.weight);
                     
                     //时间戳转换为标准格式
 
-                    var hour = (jsons.time) / 60;
-                    var maxtime = hour * 60; //一个小时，按秒计算，自己调整!   
-                    function CountDown() {
-                        if (maxtime >= 0) {
-                            minutes = Math.floor(maxtime / 60);
-                            seconds = Math.floor(maxtime % 60);
-                            msg = "距离结束还有" + minutes + "分" + seconds + "秒";
-                            document.all["timer"].innerHTML = msg;
-                            if (maxtime == 5 * 60)alert("还剩5分钟");
-                                --maxtime;
-                        } else{
-                            clearInterval(timer);
-                            alert("时间到，结束!");
-                        }
-                    }
-                    timer = setInterval(CountDown, 1000);  
+                    // var hour = (jsons.time) / 60;
+                    // var maxtime = hour * 60; //一个小时，按秒计算，自己调整!   
+                    // function CountDown() {
+                    //     if (maxtime >= 0) {
+                    //         minutes = Math.floor(maxtime / 60);
+                    //         seconds = Math.floor(maxtime % 60);
+                    //         msg = "距离结束还有" + minutes + "分" + seconds + "秒";
+                    //         document.all["timer"].innerHTML = msg;
+                    //         if (maxtime == 5 * 60)alert("还剩5分钟");
+                    //             --maxtime;
+                    //     } else{
+                    //         clearInterval(timer);
+                    //         alert("时间到，结束!");
+                    //     }
+                    // }
+                    // timer = setInterval(CountDown, 1000);  
 
 				},
 				onSuccess: function () {
