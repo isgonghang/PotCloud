@@ -98,7 +98,7 @@ public class ServerThreadHandler extends Thread {
 					outputStream.close();
 				}
 				if(bufferedReader != null) {
-					outputStream.close();
+//					outputStream.close();
 				}
 				if(inputStreamReader != null) {
 					inputStreamReader.close();

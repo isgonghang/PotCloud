@@ -170,6 +170,16 @@
     <servlet-name>UpdateAllPotInfo</servlet-name>
     <url-pattern>/updatepotinfo</url-pattern>
   </servlet-mapping>
+  
+  <!-- 获取设备信息--> 
+  <servlet>
+    <servlet-name>GetDeviceInfo</servlet-name>
+    <servlet-class>com.pot.util.GetDeviceInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDeviceInfo</servlet-name>
+    <url-pattern>/deviceinfo</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

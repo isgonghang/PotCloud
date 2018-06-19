@@ -45,6 +45,7 @@ public class SocketOperate extends Thread {
 			
             // 创建一个写线程
             new SocketInfoWriter(socket).start();
+
             // 创建一个读线程
             new SocketInfoReader(socket).start();
 			}

@@ -67,7 +67,7 @@ public class GetRecipesDetail extends HttpServlet {
 				jsonobj.put("image", result.get(i).getImage());
 				jsonobj.put("score", result.get(i).getScore());
 				jsonobj.put("time", result.get(i).getTime());
-				jsonobj.put("source", (float) 6.6);
+				jsonobj.put("source", result.get(i).getSource());
 				jsonobj.put("other", result.get(i).getOther());
 				jsonobj.put("map",String.valueOf(map2));
 				// jsonarray.add(jsonobj);
